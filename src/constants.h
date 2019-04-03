@@ -1,0 +1,1 @@
+#define CHANNEL_WIDITH 32
