@@ -2,7 +2,6 @@
 
 void Mux::switchGate(){
 	if(enable.read() == 1){
-		cout << "AQUI" << endl;
 		switch(selector.read()){
 			case 0:
 				output.write(in_0.read());

@@ -30,11 +30,7 @@ SC_MODULE(Mux){
 		enable("enable"),
 		output("output")
 	{
-		switchGate();
-		sensitive << in_0;
-		sensitive << in_1;
-		sensitive << in_2;
-		sensitive << in_3;
+		SC_METHOD(switchGate);
 		sensitive << selector;
 		sensitive << enable;
 	}

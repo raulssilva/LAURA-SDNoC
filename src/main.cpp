@@ -15,14 +15,14 @@ int sc_main(int argc, char* argv[]){
 	sc_signal<bool> e;
 	sc_signal< sc_uint<CHANNEL_WIDITH> > o;
 
-	Mux *mux = new Mux("Mux");
-	mux->in_0(v1);
-	mux->in_1(v2);
-	mux->in_2(v3);
-	mux->in_3(v4);
-	mux->selector(s);
-	mux->enable(e);
-	mux->output(o);
+	Mux mux("Mux");
+	mux.in_0(v1);
+	mux.in_1(v2);
+	mux.in_2(v3);
+	mux.in_3(v4);
+	mux.selector(s);
+	mux.enable(e);
+	mux.output(o);
 
 	sc_start();
 
@@ -36,8 +36,13 @@ int sc_main(int argc, char* argv[]){
 
 	sc_start();
 
-	cout << o.read() << endl;
-	// cout << mux.output.read() << endl;
+	cout << o << endl;
+
+	s = 1;
+
+	sc_start();
+
+	cout << o << endl;
 
 	return 0;
 }
