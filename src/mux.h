@@ -2,11 +2,11 @@
 #define _MUX_H_
 
 #include <systemc.h>
-#include <iostream>
 #include "constants.h"
 
 SC_MODULE(Mux){
 	// Mux inputs
+	sc_in<bool> clk;
 	sc_in< sc_uint<CHANNEL_WIDITH> > in_0;
 	sc_in< sc_uint<CHANNEL_WIDITH> > in_1;
 	sc_in< sc_uint<CHANNEL_WIDITH> > in_2;
@@ -22,6 +22,7 @@ SC_MODULE(Mux){
 	void switchGate();
 
 	SC_CTOR(Mux):
+		clk("mux_clock"),
 		in_0("in_0"),
 		in_1("in_1"),
 		in_2("in_2"),
@@ -33,6 +34,7 @@ SC_MODULE(Mux){
 		SC_METHOD(switchGate);
 		sensitive << selector;
 		sensitive << enable;
+		sensitive << clk;
 	}
 };
 

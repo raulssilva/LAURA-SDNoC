@@ -1,48 +1,63 @@
 #include <systemc.h>
 #include <iostream>
 #include "constants.h"
-#include "mux.h"
+#include "network.h"
 
 using namespace std;
 
 int sc_main(int argc, char* argv[]){
-	sc_signal< sc_uint<CHANNEL_WIDITH> > v1;
-	sc_signal< sc_uint<CHANNEL_WIDITH> > v2;
-	sc_signal< sc_uint<CHANNEL_WIDITH> > v3;
-	sc_signal< sc_uint<CHANNEL_WIDITH> > v4;
+	sc_signal<bool> clk;
+	sc_signal< sc_uint<ROUTERS_SWITCHERS> > switches_bitstream[N][M];
+	sc_signal< sc_uint<ROUTERS_ENABLES> > enables_bitstream[N][M];
 
-	sc_signal< sc_uint<2> > s;
-	sc_signal<bool> e;
-	sc_signal< sc_uint<CHANNEL_WIDITH> > o;
+	Network laura("laura");
+	laura.clk(clk);
+	for(int i = 0; i < N; i++){
+		for(int j = 0; j < M; j++){
+			laura.switches_bitstream[i][j](switches_bitstream[i][j]);
+			laura.enables_bitstream[i][j](enables_bitstream[i][j]);
+		}
+	}
+	// sc_signal< sc_uint<CHANNEL_WIDITH> > v1;
+	// sc_signal< sc_uint<CHANNEL_WIDITH> > v2;
+	// sc_signal< sc_uint<CHANNEL_WIDITH> > v3;
+	// sc_signal< sc_uint<CHANNEL_WIDITH> > v4;
+	// sc_signal< sc_uint<CHANNEL_WIDITH> > v5;
 
-	Mux mux("Mux");
-	mux.in_0(v1);
-	mux.in_1(v2);
-	mux.in_2(v3);
-	mux.in_3(v4);
-	mux.selector(s);
-	mux.enable(e);
-	mux.output(o);
+	// sc_signal< sc_uint<ROUTERS_SWITCHERS> > bs;
+	// sc_signal< sc_uint<ROUTERS_ENABLES> > eb;
+	
+	// sc_signal< sc_uint<CHANNEL_WIDITH> > o1;
+	// sc_signal< sc_uint<CHANNEL_WIDITH> > o2;
+	// sc_signal< sc_uint<CHANNEL_WIDITH> > o3;
+	// sc_signal< sc_uint<CHANNEL_WIDITH> > o4;
+	// sc_signal< sc_uint<CHANNEL_WIDITH> > o5;
 
-	sc_start();
+	// Router router("Router");
+	// // router.local_in(v1);
+	// // router.north_in(v2);
+	// // router.south_in(v3);
+	// // router.east_in(v4);
+	// // router.west_in(v5);
+	// router.switch_bitstream(bs);
+	// router.enable_bitstream(eb);
+	// router.clk(clk);
+	// router.local_out(o1);
+	// router.north_out(o2);
+	// router.south_out(o3);
+	// router.east_out(o4);
+	// router.west_out(o5);
 
-	v1 = 10;
-	v2 = 20;
-	v3 = 30;
-	v4 = 40;
-
-	s = 0;
-	e = 1;
-
-	sc_start();
-
-	cout << o << endl;
-
-	s = 1;
-
-	sc_start();
-
-	cout << o << endl;
-
+	// clk = 0;
+	// sc_start();
+	// clk = 1;
+	// eb = 16;
+	// bs = 0;
+	// router.north_buffer.write(12);
+	// sc_start();
+	// clk = 0;
+	// router.north_buffer.write(11);
+	// sc_start();
+	// clk = 1;
 	return 0;
 }
