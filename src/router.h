@@ -7,30 +7,30 @@
 
 SC_MODULE(Router){
 	// Router inputs
-	sc_in< sc_uint<CHANNEL_WIDITH> > local_in;
-	sc_in< sc_uint<CHANNEL_WIDITH> > north_in;
-	sc_in< sc_uint<CHANNEL_WIDITH> > south_in;
-	sc_in< sc_uint<CHANNEL_WIDITH> > east_in;
-	sc_in< sc_uint<CHANNEL_WIDITH> > west_in;
+	sc_in< sc_uint<CHANNEL_WIDITH> > local_in; 					// Foi
+	sc_in< sc_uint<CHANNEL_WIDITH> > north_in;					// Foi
+	sc_in< sc_uint<CHANNEL_WIDITH> > south_in;					// Foi
+	sc_in< sc_uint<CHANNEL_WIDITH> > east_in;					// Foi
+	sc_in< sc_uint<CHANNEL_WIDITH> > west_in;					// Foi
 
 	/*  00     00     00     00    00
 	 * Local  North  South  East  West
 	 */
-	sc_in< sc_uint<ROUTERS_SWITCHERS> > switch_bitstream;
+	sc_in< sc_uint<ROUTERS_SWITCHERS> > switch_bitstream; 		// Foi
 
 	/*   0      0      0      0     0
 	 * Local  North  South  East  West
 	 */
-	sc_in< sc_uint<ROUTERS_ENABLES> > enable_bitstream;
+	sc_in< sc_uint<ROUTERS_ENABLES> > enable_bitstream;			// Foi
 
-	sc_in<bool> clk;
+	sc_in<bool> clk;											// Foi
 
 	// Router outputs
-	sc_out< sc_uint<CHANNEL_WIDITH> > local_out;
-	sc_out< sc_uint<CHANNEL_WIDITH> > north_out;
-	sc_out< sc_uint<CHANNEL_WIDITH> > south_out;
-	sc_out< sc_uint<CHANNEL_WIDITH> > east_out;
-	sc_out< sc_uint<CHANNEL_WIDITH> > west_out;
+	sc_out< sc_uint<CHANNEL_WIDITH> > local_out;				// Foi
+	sc_out< sc_uint<CHANNEL_WIDITH> > north_out;				// Foi
+	sc_out< sc_uint<CHANNEL_WIDITH> > south_out;				// Foi
+	sc_out< sc_uint<CHANNEL_WIDITH> > east_out;					// Foi
+	sc_out< sc_uint<CHANNEL_WIDITH> > west_out;					// Foi
 
 	// Router modules
 	sc_buffer< sc_uint<CHANNEL_WIDITH> > local_buffer;

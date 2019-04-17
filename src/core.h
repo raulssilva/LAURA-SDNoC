@@ -15,15 +15,14 @@ SC_MODULE(Core){
 	sc_in< sc_uint<CHANNEL_WIDITH> > data_in;
 
 	// Core outputs
-	// sc_out< sc_uint<CORE_ID> > requested_CoreId;
-	sc_out<int> requested_CoreId;
+	sc_out<int> requested_coreX;
+	sc_out<int> requested_coreY;
 	sc_out< sc_uint<CHANNEL_WIDITH> > data_out;
-	sc_out<bool> thread_finished;
+	sc_out<bool> finish;
 
 	// Messages
 	sc_time cyclesElapsed;
 	vector<int> idleCycles; // Waiting time (clock cycles) to request a new communication
-	// vector< sc_uint<CORE_ID> > destinyCores; // List of destiny cores to send the packages
 	vector<int> destinyCores; // List of destiny cores to send the packages
 	vector<int> numPckgs; // Number of packages to be send in each communication
 	vector< sc_uint<CHANNEL_WIDITH> > packages; // List of packages to be send from this core.
@@ -36,9 +35,10 @@ SC_MODULE(Core){
 		start("start"),
 		channel_available("channel_available"),
 		data_in("data_in"),
-		requested_CoreId("requested_CoreId"),
+		requested_coreX("requested_coreX"),
+		requested_coreY("requested_coreY"),
 		data_out("data_out"),
-		thread_finished("thread_finished")
+		finish("finish")
 	{
 		cyclesElapsed = sc_time_stamp();
 
