@@ -3,6 +3,7 @@
 
 #include <systemc.h>
 #include <vector>
+#include <tuple>
 #include "constants.h"
 
 using namespace std;
@@ -23,7 +24,7 @@ SC_MODULE(Core){
 	// Messages
 	sc_time cyclesElapsed;
 	vector<int> idleCycles; // Waiting time (clock cycles) to request a new communication
-	vector<int> destinyCores; // List of destiny cores to send the packages
+	vector< tuple<int, int> > destinyCores; // List of destiny cores to send the packages
 	vector<int> numPckgs; // Number of packages to be send in each communication
 	vector< sc_uint<CHANNEL_WIDITH> > packages; // List of packages to be send from this core.
 

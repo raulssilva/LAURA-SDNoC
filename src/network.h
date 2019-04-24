@@ -16,7 +16,7 @@ SC_MODULE(Network){
 	sc_in< sc_uint<ROUTERS_SWITCHERS> > switches_bitstream[N][M];
 	sc_in< sc_uint<ROUTERS_ENABLES> > enables_bitstream[N][M];
 	sc_in<bool> started_threads[N][M];
-	sc_in<bool> channels_available[N][M];
+	sc_in<bool> available_channels[N][M];
 
 	// Network outputs
 	sc_out<int> requested_coresX[N][M];
@@ -26,6 +26,11 @@ SC_MODULE(Network){
 	// Network modules
 	Router *routers[N][M];
 	Core *cores[N][M];
+
+	// Network signals
+	sc_signal< sc_uint<CHANNEL_WIDITH> > signal_rLocalIn[N][M];
+	sc_signal< sc_uint<CHANNEL_WIDITH> > signal_rLocalOut[N][M];
+	sc_signal< sc_uint<CHANNEL_WIDITH> > signal_ground;
 
 	SC_CTOR(Network):
 		clk("routers_clock")
@@ -39,30 +44,51 @@ SC_MODULE(Network){
 				routers[i][j]->clk(clk);
 				routers[i][j]->switch_bitstream(switches_bitstream[i][j]);
 				routers[i][j]->enable_bitstream(enables_bitstream[i][j]);
-				routers[i][j]->local_in(cores[i][j]->data_out);
+				routers[i][j]->local_in(signal_rLocalIn[i][j]);
+				routers[i][j]->local_out(signal_rLocalOut[i][j]);
 
 				cores[i][j]->clk(clk);
 				cores[i][j]->start(started_threads[i][j]);
-				cores[i][j]->channel_available(channels_available[i][j]);
-				cores[i][j]->data_in(routers[i][j]->local_out);
+				cores[i][j]->channel_available(available_channels[i][j]);
+				cores[i][j]->data_in(signal_rLocalOut[i][j]);
 				cores[i][j]->requested_coreX(requested_coresX[i][j]);
 				cores[i][j]->requested_coreY(requested_coresY[i][j]);
 				cores[i][j]->finish(finished_threads[i][j]);
+				cores[i][j]->data_out(signal_rLocalIn[i][j]);
 			}
 		}
 
 		for(int i = 0; i < N; i++){
-			for(int j = i + 1; j < M; j++){
-				if(i < (N - 1)){
-					routers[i][j-1]->east_in(routers[i][j]->west_out);
-					routers[i][j]->west_in(routers[i][j-1]->east_out);
-
-					routers[i][j-1]->south_in(routers[i+1][j-1]->north_out);
-					routers[i+1][j-1]->north_in(routers[i][j-1]->south_out);
-				}else{
-					routers[i][j-1]->east_in(routers[i][j]->west_out);
-					routers[i][j]->west_in(routers[i][j-1]->east_out);
+			for(int j = 0; j < M; j++){
+				if(j == 0){
+					routers[i][j]->west_out(signal_ground);
 				}
+
+				if(j == (N - 1)){
+					routers[i][j]->east_out(signal_ground);
+				}
+
+				if(i == 0){
+					routers[i][j]->north_out(signal_ground);
+				}
+
+				if(i == (M - 1)){
+					routers[i][j]->south_out(signal_ground);
+				}
+			}
+		}
+
+		for(int i = 0; i < (N - 1); i++){
+			for(int j = 0; j < M; j++){
+				routers[i+1][j]->north_out(routers[i][j]->south_in);
+				routers[i][j]->south_out(routers[i+1][j]->north_in);
+			}
+		}
+
+		for(int i = 0; i < N; i++){
+			for(int j = 0; j < (M - 1); j++){
+				routers[i][j+1]->west_out(routers[i][j]->east_in);
+				routers[i][j]->east_out(routers[i][j+1]->west_in);
 			}
 		}
 	}

@@ -2,7 +2,9 @@
 #define _MANAGER_H_
 
 #include <systemc.h>
+#include <iostream>
 #include <vector>
+#include <tuple>
 #include "constants.h"
 
 using namespace std;
@@ -10,24 +12,30 @@ using namespace std;
 SC_MODULE(Manager){
 	// Manager inputs
 	sc_in<bool> clk;
-	sc_in<int> route_requests[N*M];
 	sc_in<bool> routing_algorithm;
+	sc_in<int> route_requestsX[N][M];
+	sc_in<int> route_requestsY[N][M];
 
 	// Manager outputs
-	sc_out<bool> available_channels[N*M];
+	sc_out<bool> available_channels[N][M];
+	sc_out< sc_uint<ROUTERS_SWITCHERS> > swtBitsteam[N][M];
+	sc_out< sc_uint<ROUTERS_ENABLES> > enBitstream[N][M];
 
 	// Messages
 
 	// Behaviors
 	void routeRequest();
 	void generateRoutes();
+	void enableRoutes();
 
 	// Graphs
 	int network[N*M][N*M];
-	vector< vector<int> > paths;
+	vector< vector< tuple<int, int> > > paths;
+	int switchers[N][M];
+	int enables[N][M];
 
 	// Requests queue
-	vector<int> requests_queue;
+	vector< tuple<int, int> > requests_queue;
 
 	void dijkstra(int src, int dest);
 	void xy(int srcX, int srcY, int destX, int destY);
@@ -37,6 +45,13 @@ SC_MODULE(Manager){
 		clk("noc_clock"),
 		routing_algorithm("routing_algorithm")
 	{
+
+		for(int i = 0; i < N; i++){
+			for(int j = 0; j < M; j++){
+				switchers[i][j] = 0;
+				enables[i][j] = 0;
+			}
+		}
 
 		for(int i = 0; i < N*M; i++){
 			for(int j = 0; j < N*M; j++){
@@ -79,7 +94,8 @@ SC_MODULE(Manager){
 		}
 
 		SC_CTHREAD(routeRequest, clk.pos());
-		SC_CTHREAD(generateRoutes, clk.pos());		
+		SC_CTHREAD(generateRoutes, clk.pos());
+		SC_CTHREAD(enableRoutes, clk.pos());
 	}
 };
 
