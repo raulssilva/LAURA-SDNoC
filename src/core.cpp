@@ -12,17 +12,61 @@ void Core::requestRoute(){
 					requested_coreX.write(get<0>(destinyCores.front()));
 					requested_coreY.write(get<1>(destinyCores.front()));
 
-					// cout << sc_time_stamp() << endl;
-			// 		while(channel_available.read() != 1){
-			// 			wait();
-			// 		}
+					while(channel_available.read() != 1){
+						wait();
+					}
+					requested_coreX.write(-1);
+					requested_coreY.write(-1);
 
-			// 		cyclesElapsed = sc_time_stamp();
-			// 		idleCycles.erase(idleCycles.begin());
+					sendPackages();
+
+					idleCycles.erase(idleCycles.begin());
 				}
 			}else{
 				finish.write(1);
 			}
 		}
+
+		if(last_pckgReceived == 1){
+			last_pckgReceived.write(false);
+		}
 	}
 }
+
+void Core::sendPackages(){
+	for(int i = 0; i < numPckgs.front(); i++){
+		wait();
+		data_out.write(packages[i]);
+	}
+
+	for(int i = 0; i < numPckgs.front(); i++){
+		packages.erase(packages.begin());
+	}
+
+	numPckgs.erase(numPckgs.begin());
+}
+
+void Core::receivePackages(){
+	last_pckgReceived.write(false);
+	cout << data_in.read() << endl;
+	if(data_in.read() == 1){
+		cyclesElapsed = sc_time_stamp();
+		last_pckgReceived.write(true);
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

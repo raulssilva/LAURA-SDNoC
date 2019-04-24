@@ -22,13 +22,13 @@ SC_MODULE(Network){
 	sc_out<int> requested_coresX[N][M];
 	sc_out<int> requested_coresY[N][M];
 	sc_out<bool> finished_threads[N][M];
+	sc_out<bool> ended_communications[N][M];
 
 	// Network modules
 	Router *routers[N][M];
 	Core *cores[N][M];
 
 	// Network signals
-	sc_signal< sc_uint<CHANNEL_WIDITH> > signal_rLocalIn[N][M];
 	sc_signal< sc_uint<CHANNEL_WIDITH> > signal_rLocalOut[N][M];
 	sc_signal< sc_uint<CHANNEL_WIDITH> > signal_ground;
 
@@ -44,7 +44,6 @@ SC_MODULE(Network){
 				routers[i][j]->clk(clk);
 				routers[i][j]->switch_bitstream(switches_bitstream[i][j]);
 				routers[i][j]->enable_bitstream(enables_bitstream[i][j]);
-				routers[i][j]->local_in(signal_rLocalIn[i][j]);
 				routers[i][j]->local_out(signal_rLocalOut[i][j]);
 
 				cores[i][j]->clk(clk);
@@ -54,7 +53,10 @@ SC_MODULE(Network){
 				cores[i][j]->requested_coreX(requested_coresX[i][j]);
 				cores[i][j]->requested_coreY(requested_coresY[i][j]);
 				cores[i][j]->finish(finished_threads[i][j]);
-				cores[i][j]->data_out(signal_rLocalIn[i][j]);
+				cores[i][j]->data_out(routers[i][j]->local_in);
+				cores[i][j]->last_pckgReceived(ended_communications[i][j]);
+
+				signal_rLocalOut[i][j] = -1;
 			}
 		}
 

@@ -3,7 +3,6 @@
 void Manager::routeRequest(){
 	while(true){
 		wait();
-
 		for(int i = 0; i < N; i++){
 			for(int j = 0; j < M; j++){
 				if(route_requestsX[i][j].read() != -1 && route_requestsY[i][j].read() != -1){
@@ -38,6 +37,16 @@ void Manager::generateRoutes(){
 				xy(srcX, srcY, destX, destY);
 			}else{
 				// dijkstra(requests_queue[0], route_requests[requests_queue[0]].read());
+			}
+		}
+
+		if(requests_queue.size() > 0){
+			for(int i = 0; i < paths.size(); i++){
+				if(paths[i][0] == requests_queue.front()){
+					if(available_channels[get<0>(paths[i][0])][get<1>(paths[i][0])] == 1){
+						requests_queue.erase(requests_queue.begin());
+					}
+				}
 			}
 		}
 	}
@@ -90,7 +99,6 @@ void Manager::xy(int srcX, int srcY, int destX, int destY){
 	}
 
 	paths.push_back(path);
-	requests_queue.erase(requests_queue.begin());
 }
 
 void Manager::enableRoutes(){
@@ -220,6 +228,32 @@ void Manager::enableRoutes(){
 				swtBitsteam[currX][currY].write(switchers[currX][currY]);
 			}
 
+			available_channels[get<0>(path[0])][get<1>(path[0])].write(true);
+		}
+	}
+}
+
+void Manager::checkEndedCommunications(){
+	while(true){
+		wait();
+
+		for(int i = 0; i < N; i++){
+			for(int j = 0; j < M; j++){
+				if(ended_communications[i][j].read() == 1){
+					for(int k = 0; k < paths.size(); k++){
+						tuple<int, int> destCore(i, j);
+						vector< tuple<int, int> > path = paths[k];
+						if(path[path.size() - 1] == destCore){
+							for(int l = 0; l < path.size() - 1; l++){
+								int xValue = get<0>(path[l]) + get<1>(path[l]) * N;
+								int yValue = get<0>(path[l+1]) + get<1>(path[l+1]) * N;
+								network[xValue][yValue] = 1;
+							}
+							paths.erase(paths.begin()+k);
+						}
+					}
+				}
+			}
 		}
 	}
 }

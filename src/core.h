@@ -20,6 +20,7 @@ SC_MODULE(Core){
 	sc_out<int> requested_coreY;
 	sc_out< sc_uint<CHANNEL_WIDITH> > data_out;
 	sc_out<bool> finish;
+	sc_out<bool> last_pckgReceived;
 
 	// Messages
 	sc_time cyclesElapsed;
@@ -30,6 +31,8 @@ SC_MODULE(Core){
 
 	// Behaviors
 	void requestRoute();
+	void sendPackages();
+	void receivePackages();
 
 	SC_CTOR(Core):
 		clk("noc_clock"),
@@ -42,8 +45,11 @@ SC_MODULE(Core){
 		finish("finish")
 	{
 		cyclesElapsed = sc_time_stamp();
+		// last_pckgReceived.write(false);
 
 		SC_CTHREAD(requestRoute, clk.pos());
+		SC_METHOD(receivePackages);
+		sensitive << data_in;
 	}
 };
 

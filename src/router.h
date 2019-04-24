@@ -7,7 +7,7 @@
 
 SC_MODULE(Router){
 	// Router inputs
-	sc_in< sc_uint<CHANNEL_WIDITH> > local_in;
+	// sc_in< sc_uint<CHANNEL_WIDITH> > local_in;
 
 	/*  00     00     00     00    00
 	 * Local  North  South  East  West
@@ -29,7 +29,7 @@ SC_MODULE(Router){
 	sc_out< sc_uint<CHANNEL_WIDITH> > west_out;
 
 	// Router modules
-	sc_buffer< sc_uint<CHANNEL_WIDITH> > local_buffer;
+	sc_buffer< sc_uint<CHANNEL_WIDITH> > local_in;
 	sc_buffer< sc_uint<CHANNEL_WIDITH> > north_in;
 	sc_buffer< sc_uint<CHANNEL_WIDITH> > south_in;
 	sc_buffer< sc_uint<CHANNEL_WIDITH> > east_in;
@@ -89,7 +89,7 @@ SC_MODULE(Router){
 		local_mux->clk(clk);
 
 		// Binds for the north router
-		north_mux->in_0(local_buffer);
+		north_mux->in_0(local_in);
 		north_mux->in_1(south_in);
 		north_mux->in_2(east_in);
 		north_mux->in_3(west_in);
@@ -100,7 +100,7 @@ SC_MODULE(Router){
 
 		// Binds for the south router
 		south_mux->in_0(north_in);
-		south_mux->in_1(local_buffer);
+		south_mux->in_1(local_in);
 		south_mux->in_2(east_in);
 		south_mux->in_3(west_in);
 		south_mux->output(south_out);
@@ -111,7 +111,7 @@ SC_MODULE(Router){
 		// Binds for the east router
 		east_mux->in_0(north_in);
 		east_mux->in_1(south_in);
-		east_mux->in_2(local_buffer);
+		east_mux->in_2(local_in);
 		east_mux->in_3(west_in);
 		east_mux->output(east_out);
 		east_mux->selector(eSelector_mux);
@@ -122,7 +122,7 @@ SC_MODULE(Router){
 		west_mux->in_0(north_in);
 		west_mux->in_1(south_in);
 		west_mux->in_2(east_in);
-		west_mux->in_3(local_buffer);
+		west_mux->in_3(local_in);
 		west_mux->output(west_out);
 		west_mux->selector(wSelector_mux);
 		west_mux->enable(wEnable_mux);

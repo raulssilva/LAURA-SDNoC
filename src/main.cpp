@@ -16,6 +16,7 @@ int sc_main(int argc, char* argv[]){
 	sc_signal< sc_uint<ROUTERS_ENABLES> > signal_enBitstream[N][M];
 	sc_signal<bool> signal_startedThreads[N][M];
 	sc_signal<bool> signal_availableChannels[N][M];
+	sc_signal<bool> signal_endedCommunications[N][M];
 	sc_signal<int> signal_requestedCoresX[N][M];
 	sc_signal<int> signal_requestedCoresY[N][M];
 	sc_signal<bool> signal_finishedThreads[N][M];
@@ -33,6 +34,7 @@ int sc_main(int argc, char* argv[]){
 			laura.requested_coresX[i][j](signal_requestedCoresX[i][j]);
 			laura.requested_coresY[i][j](signal_requestedCoresY[i][j]);
 			laura.finished_threads[i][j](signal_finishedThreads[i][j]);
+			laura.ended_communications[i][j](signal_endedCommunications[i][j]);
 		}
 	}
 
@@ -47,6 +49,7 @@ int sc_main(int argc, char* argv[]){
 			manager.swtBitsteam[i][j](signal_swtBitsteam[i][j]);
 			manager.enBitstream[i][j](signal_enBitstream[i][j]);
 			manager.available_channels[i][j](signal_availableChannels[i][j]);
+			manager.ended_communications[i][j](signal_endedCommunications[i][j]);
 		}
 	}
 
@@ -95,7 +98,7 @@ int sc_main(int argc, char* argv[]){
 					return -1;
 				}
 
-			}else if(opCode == "ICR"){
+			}else if(opCode == "CR"){
 
 				int srcX = atoi(content.substr(0, content.find(' ')).c_str());
 				content = content.substr(content.find(' ')+1);
@@ -115,27 +118,28 @@ int sc_main(int argc, char* argv[]){
 				laura.cores[srcX][srcY]->numPckgs.push_back(numPckgs);
 				laura.cores[srcX][srcY]->idleCycles.push_back(idleCycles);
 
-				for(int i = numPckgs - 1; i >= 0; i--){
+				for(int i = numPckgs; i > 0; i--){
 					laura.cores[srcX][srcY]->packages.push_back(i);
 				}
 
 				signal_startedThreads[srcX][srcY] = 1;
-
-			}else if(opCode == "CR"){
-				int srcX = atoi(content.substr(0, content.find(' ')).c_str());
-				content = content.substr(content.find(' ')+1);
-				int srcY = atoi(content.substr(0, content.find(' ')).c_str());
-
-				content = content.substr(content.find(' ')+1);
-				int destX = atoi(content.substr(0, content.find(' ')).c_str());
-				content = content.substr(content.find(' ')+1);
-				int destY = atoi(content.substr(0, content.find(' ')).c_str());
-
-				content = content.substr(content.find(' ')+1);
-				int numPckgs = atoi(content.substr(0, content.find(' ')).c_str());
-				content = content.substr(content.find(' ')+1);
-				int idleCycles = atoi(content.substr(0, content.find(' ')).c_str());
 			}
+
+			// }else if(opCode == "CR"){
+			// 	int srcX = atoi(content.substr(0, content.find(' ')).c_str());
+			// 	content = content.substr(content.find(' ')+1);
+			// 	int srcY = atoi(content.substr(0, content.find(' ')).c_str());
+
+			// 	content = content.substr(content.find(' ')+1);
+			// 	int destX = atoi(content.substr(0, content.find(' ')).c_str());
+			// 	content = content.substr(content.find(' ')+1);
+			// 	int destY = atoi(content.substr(0, content.find(' ')).c_str());
+
+			// 	content = content.substr(content.find(' ')+1);
+			// 	int numPckgs = atoi(content.substr(0, content.find(' ')).c_str());
+			// 	content = content.substr(content.find(' ')+1);
+			// 	int idleCycles = atoi(content.substr(0, content.find(' ')).c_str());
+			// }
 		}
 		simFile.close();
 	}else{
@@ -149,7 +153,7 @@ int sc_main(int argc, char* argv[]){
 
 	cout << "------------------ BEGIN SIMULATION ------------------" << endl;
 
-	sc_start(20, SC_NS);
+	sc_start(100, SC_NS);
 
 
 

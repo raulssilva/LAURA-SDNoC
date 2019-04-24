@@ -15,6 +15,7 @@ SC_MODULE(Manager){
 	sc_in<bool> routing_algorithm;
 	sc_in<int> route_requestsX[N][M];
 	sc_in<int> route_requestsY[N][M];
+	sc_in<bool> ended_communications[N][M];
 
 	// Manager outputs
 	sc_out<bool> available_channels[N][M];
@@ -27,6 +28,7 @@ SC_MODULE(Manager){
 	void routeRequest();
 	void generateRoutes();
 	void enableRoutes();
+	void checkEndedCommunications();
 
 	// Graphs
 	int network[N*M][N*M];
@@ -96,6 +98,7 @@ SC_MODULE(Manager){
 		SC_CTHREAD(routeRequest, clk.pos());
 		SC_CTHREAD(generateRoutes, clk.pos());
 		SC_CTHREAD(enableRoutes, clk.pos());
+		SC_CTHREAD(checkEndedCommunications, clk.pos());
 	}
 };
 
