@@ -9,6 +9,7 @@ void Core::requestRoute(){
 		if(start.read() == 1){
 			if(!idleCycles.empty()){
 				if(idleCycles.front() <= (sc_time_stamp() - cyclesElapsed).value()/1000){
+					cout << "Requesting route at: " << sc_time_stamp() << endl;
 					requested_coreX.write(get<0>(destinyCores.front()));
 					requested_coreY.write(get<1>(destinyCores.front()));
 
@@ -36,6 +37,7 @@ void Core::requestRoute(){
 void Core::sendPackages(){
 	for(int i = 0; i < numPckgs.front(); i++){
 		wait();
+		cout << "Send: " << packages[i] << " At:" << sc_time_stamp() << endl;
 		data_out.write(packages[i]);
 	}
 
@@ -48,7 +50,9 @@ void Core::sendPackages(){
 
 void Core::receivePackages(){
 	last_pckgReceived.write(false);
-	cout << data_in.read() << endl;
+	if(data_in.read() != 4294967295 && data_in.read() != 0){
+		cout << "Receiving: " << data_in.read() << " At:" << sc_time_stamp() << endl;
+	}
 	if(data_in.read() == 1){
 		cyclesElapsed = sc_time_stamp();
 		last_pckgReceived.write(true);

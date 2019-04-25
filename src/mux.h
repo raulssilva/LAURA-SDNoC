@@ -31,10 +31,7 @@ SC_MODULE(Mux){
 		enable("enable"),
 		output("output")
 	{
-		SC_METHOD(switchGate);
-		sensitive << selector;
-		sensitive << enable;
-		sensitive << clk;
+		SC_CTHREAD(switchGate, clk.pos());
 	}
 };
 
