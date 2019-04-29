@@ -370,7 +370,7 @@ void Manager::checkEndedCommunications(){
 								swtBitsteam[currX][currY].write(switchers[currX][currY]);
 							}
 
-							available_channels[get<0>(path[0])][get<1>(path[0])].write(true);
+							available_channels[get<0>(path[0])][get<1>(path[0])].write(false);
 
 							paths.erase(paths.begin()+k);
 						}
