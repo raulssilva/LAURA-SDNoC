@@ -248,7 +248,130 @@ void Manager::checkEndedCommunications(){
 								int xValue = get<0>(path[l]) + get<1>(path[l]) * N;
 								int yValue = get<0>(path[l+1]) + get<1>(path[l+1]) * N;
 								network[xValue][yValue] = 1;
+
+								int currX = get<0>(path[l]);
+								int currY = get<1>(path[l]);
+
+								int nextX = get<0>(path[l+1]);
+								int nextY = get<1>(path[l+1]);
+
+								if(l == 0){
+									if(nextX > currX){
+										enables[currX][currY] = enables[currX][currY] & 27; // 11011
+										switchers[currX][currY] = switchers[currX][currY] & 1007; // 11 11 10 11 11
+										
+										swtBitsteam[currX][currY].write(switchers[currX][currY]);
+										enBitstream[currX][currY].write(enables[currX][currY]);
+									}else if(nextX < currX){
+										enables[currX][currY] = enables[currX][currY] & 23; // 10111
+										switchers[currX][currY] = switchers[currX][currY] & 1023; // 11 11 11 11 11
+										
+										swtBitsteam[currX][currY].write(switchers[currX][currY]);
+										enBitstream[currX][currY].write(enables[currX][currY]);
+									}
+
+									if(nextY > currY){
+										enables[currX][currY] = enables[currX][currY] & 29; // 11101
+										switchers[currX][currY] = switchers[currX][currY] & 1015; // 11 11 11 01 11
+										
+										swtBitsteam[currX][currY].write(switchers[currX][currY]);
+										enBitstream[currX][currY].write(enables[currX][currY]);
+									}else if(nextY < currY){
+										enables[currX][currY] = enables[currX][currY] & 30; // 11110
+										switchers[currX][currY] = switchers[currX][currY] & 1020; // 11 11 11 11 00
+										
+										swtBitsteam[currX][currY].write(switchers[currX][currY]);
+										enBitstream[currX][currY].write(enables[currX][currY]);
+									}
+								}else{
+									int prevX = get<0>(path[l-1]);
+									int prevY = get<1>(path[l-1]);
+									if(nextX > currX){
+										enables[currX][currY] = enables[currX][currY] & 27; // 11011
+										enBitstream[currX][currY].write(enables[currX][currY]);
+
+										if(prevX < currX){
+											switchers[currX][currY] = switchers[currX][currY] & 1023; // 11 11 11 11 11
+											swtBitsteam[currX][currY].write(switchers[currX][currY]);
+										}else if(prevY > currY){
+											switchers[currX][currY] = switchers[currX][currY] & 991; // 11 11 01 11 11
+											swtBitsteam[currX][currY].write(switchers[currX][currY]);
+										}else if(prevY < currY){
+											switchers[currX][currY] = switchers[currX][currY] & 975; // 11 11 00 11 11
+											swtBitsteam[currX][currY].write(switchers[currX][currY]);
+										}
+									}else if(nextX < currX){
+										enables[currX][currY] = enables[currX][currY] & 23; // 10111
+										enBitstream[currX][currY].write(enables[currX][currY]);
+
+										if(prevX > currX){
+											switchers[currX][currY] = switchers[currX][currY] & 959; // 11 10 11 11 11
+											swtBitsteam[currX][currY].write(switchers[currX][currY]);
+										}else if(prevY > currY){
+											switchers[currX][currY] = switchers[currX][currY] & 895; // 11 01 11 11 11
+											swtBitsteam[currX][currY].write(switchers[currX][currY]);
+										}else if(prevY < currY){
+											switchers[currX][currY] = switchers[currX][currY] & 831; // 11 00 11 11 11
+											swtBitsteam[currX][currY].write(switchers[currX][currY]);
+										}
+									}
+
+									if(nextY > currY){
+										enables[currX][currY] = enables[currX][currY] & 29; // 11101
+										enBitstream[currX][currY].write(enables[currX][currY]);
+
+										if(prevX < currX){
+											switchers[currX][currY] = switchers[currX][currY] & 1023; // 11 11 11 11 11
+											swtBitsteam[currX][currY].write(switchers[currX][currY]);
+										}else if(prevX > currX){
+											switchers[currX][currY] = switchers[currX][currY] & 1019; // 11 11 11 10 11
+											swtBitsteam[currX][currY].write(switchers[currX][currY]);
+										}else if(prevY < currY){
+											switchers[currX][currY] = switchers[currX][currY] & 1011; // 11 11 11 00 11
+											swtBitsteam[currX][currY].write(switchers[currX][currY]);
+										}
+									}else if(nextY < currY){
+										enables[currX][currY] = enables[currX][currY] & 30; // 11110
+										enBitstream[currX][currY].write(enables[currX][currY]);
+
+										if(prevX < currX){
+											switchers[currX][currY] = switchers[currX][currY] & 1023; // 11 11 11 11 11
+											swtBitsteam[currX][currY].write(switchers[currX][currY]);
+										}else if(prevX > currX){
+											switchers[currX][currY] = switchers[currX][currY] & 1022; // 11 11 11 11 10
+											swtBitsteam[currX][currY].write(switchers[currX][currY]);
+										}else if(prevY > currY){
+											switchers[currX][currY] = switchers[currX][currY] & 1021; // 11 11 11 11 01
+											swtBitsteam[currX][currY].write(switchers[currX][currY]);
+										}
+									}
+								}
 							}
+
+							int currX = get<0>(path[path.size() - 1]);
+							int currY = get<1>(path[path.size() - 1]);
+							int prevX = get<0>(path[path.size() - 2]);
+							int prevY = get<1>(path[path.size() - 2]);
+
+							enables[currX][currY] = enables[currX][currY] & 15; // 01111
+							enBitstream[currX][currY].write(enables[currX][currY]);
+
+							if(prevX < currX){
+								switchers[currX][currY] = switchers[currX][currY] & 1023; // 11 11 11 11 11
+								swtBitsteam[currX][currY].write(switchers[currX][currY]);
+							}else if(prevX > currX){
+								switchers[currX][currY] = switchers[currX][currY] & 767; // 10 11 11 11 11
+								swtBitsteam[currX][currY].write(switchers[currX][currY]);
+							}else if(prevY < currY){
+								switchers[currX][currY] = switchers[currX][currY] & 255; // 00 11 11 11 11
+								swtBitsteam[currX][currY].write(switchers[currX][currY]);
+							}else if(prevY < currY){
+								switchers[currX][currY] = switchers[currX][currY] & 511; // 01 11 11 11 11
+								swtBitsteam[currX][currY].write(switchers[currX][currY]);
+							}
+
+							available_channels[get<0>(path[0])][get<1>(path[0])].write(true);
+
 							paths.erase(paths.begin()+k);
 						}
 					}
