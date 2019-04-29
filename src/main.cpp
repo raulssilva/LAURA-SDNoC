@@ -50,6 +50,7 @@ int sc_main(int argc, char* argv[]){
 			manager.enBitstream[i][j](signal_enBitstream[i][j]);
 			manager.available_channels[i][j](signal_availableChannels[i][j]);
 			manager.ended_communications[i][j](signal_endedCommunications[i][j]);
+			manager.finished_threads[i][j](signal_finishedThreads[i][j]);
 		}
 	}
 
@@ -118,28 +119,8 @@ int sc_main(int argc, char* argv[]){
 				laura.cores[srcX][srcY]->numPckgs.push_back(numPckgs);
 				laura.cores[srcX][srcY]->idleCycles.push_back(idleCycles);
 
-				for(int i = numPckgs; i > 0; i--){
-					laura.cores[srcX][srcY]->packages.push_back(i);
-				}
-
 				signal_startedThreads[srcX][srcY] = 1;
 			}
-
-			// }else if(opCode == "CR"){
-			// 	int srcX = atoi(content.substr(0, content.find(' ')).c_str());
-			// 	content = content.substr(content.find(' ')+1);
-			// 	int srcY = atoi(content.substr(0, content.find(' ')).c_str());
-
-			// 	content = content.substr(content.find(' ')+1);
-			// 	int destX = atoi(content.substr(0, content.find(' ')).c_str());
-			// 	content = content.substr(content.find(' ')+1);
-			// 	int destY = atoi(content.substr(0, content.find(' ')).c_str());
-
-			// 	content = content.substr(content.find(' ')+1);
-			// 	int numPckgs = atoi(content.substr(0, content.find(' ')).c_str());
-			// 	content = content.substr(content.find(' ')+1);
-			// 	int idleCycles = atoi(content.substr(0, content.find(' ')).c_str());
-			// }
 		}
 		simFile.close();
 	}else{
@@ -150,10 +131,58 @@ int sc_main(int argc, char* argv[]){
 		cout << endl;
 	}
 
+	for(int i = 0; i < N; i++){
+		for(int j = 0; j < M; j++){
+			
+			signal_startedThreads[i][j] = 1;
+			bool change;
+
+			do {
+				bool change = false;
+				if(laura.cores[i][j]->idleCycles.size() == 0){
+					break;
+				}
+
+				for(int k = 0; k < laura.cores[i][j]->idleCycles.size() - 1; k++){
+
+					if(k == (laura.cores[i][j]->idleCycles.size() - 1)){
+						break;
+					}
+
+					if(laura.cores[i][j]->idleCycles[k] > laura.cores[i][j]->idleCycles[k+1]){
+						tuple<int, int> auxDestCore(get<0>(laura.cores[i][j]->destinyCores[k]), get<1>(laura.cores[i][j]->destinyCores[k]));
+						int auxNumPckgs = laura.cores[i][j]->numPckgs[k];
+						int auxIdleCycles = laura.cores[i][j]->idleCycles[k];
+
+						laura.cores[i][j]->destinyCores[k] = laura.cores[i][j]->destinyCores[k+1];
+						laura.cores[i][j]->destinyCores[k+1] = auxDestCore;
+
+						laura.cores[i][j]->numPckgs[k] = laura.cores[i][j]->numPckgs[k+1];
+						laura.cores[i][j]->numPckgs[k+1] = auxNumPckgs;
+
+						laura.cores[i][j]->idleCycles[k] = laura.cores[i][j]->idleCycles[k+1];
+						laura.cores[i][j]->idleCycles[k+1] = auxIdleCycles;
+
+						change = true;
+					}
+				}
+			} while(change);
+		}
+	}
+	
+	// for(int i = 0; i < N; i++){
+	// 	for(int j = 0; j < M; j++){
+	// 		for(int k = 0; k < laura.cores[i][j]->idleCycles.size(); k++){
+	// 			cout << laura.cores[i][j]->name() << " - " << laura.cores[i][j]->idleCycles[k] << endl;
+	// 		}
+	// 	}
+	// }
+
 
 	cout << "------------------ BEGIN SIMULATION ------------------" << endl;
 
-	sc_start(100, SC_NS);
+	// sc_start(200, SC_NS);
+	sc_start();
 
 
 

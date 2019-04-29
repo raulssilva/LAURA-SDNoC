@@ -23,11 +23,11 @@ SC_MODULE(Core){
 	sc_out<bool> last_pckgReceived;
 
 	// Messages
-	sc_time cyclesElapsed;
+	int cyclesElapsed;
+	bool lastPackageIncoming;
 	vector<int> idleCycles; // Waiting time (clock cycles) to request a new communication
 	vector< tuple<int, int> > destinyCores; // List of destiny cores to send the packages
 	vector<int> numPckgs; // Number of packages to be send in each communication
-	vector< sc_uint<CHANNEL_WIDITH> > packages; // List of packages to be send from this core.
 
 	// Behaviors
 	void requestRoute();
@@ -44,8 +44,8 @@ SC_MODULE(Core){
 		data_out("data_out"),
 		finish("finish")
 	{
-		cyclesElapsed = sc_time_stamp();
-		// last_pckgReceived.write(false);
+		cyclesElapsed = 0;
+		lastPackageIncoming = false;
 
 		SC_CTHREAD(requestRoute, clk.pos());
 		SC_METHOD(receivePackages);

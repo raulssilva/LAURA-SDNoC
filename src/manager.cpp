@@ -106,6 +106,7 @@ void Manager::enableRoutes(){
 		wait();
 		for(int i = 0; i < paths.size(); i++){
 			vector< tuple<int, int> > path = paths[i];
+
 			for(int j = 0; j < (path.size() - 1); j++){
 				int currX = get<0>(path[j]);
 				int currY = get<1>(path[j]);
@@ -223,7 +224,7 @@ void Manager::enableRoutes(){
 			}else if(prevY < currY){
 				switchers[currX][currY] = switchers[currX][currY] | 768; // 11 00 00 00 00
 				swtBitsteam[currX][currY].write(switchers[currX][currY]);
-			}else if(prevY < currY){
+			}else if(prevY > currY){
 				switchers[currX][currY] = switchers[currX][currY] | 512; // 10 00 00 00 00
 				swtBitsteam[currX][currY].write(switchers[currX][currY]);
 			}
@@ -365,7 +366,7 @@ void Manager::checkEndedCommunications(){
 							}else if(prevY < currY){
 								switchers[currX][currY] = switchers[currX][currY] & 255; // 00 11 11 11 11
 								swtBitsteam[currX][currY].write(switchers[currX][currY]);
-							}else if(prevY < currY){
+							}else if(prevY > currY){
 								switchers[currX][currY] = switchers[currX][currY] & 511; // 01 11 11 11 11
 								swtBitsteam[currX][currY].write(switchers[currX][currY]);
 							}
@@ -377,6 +378,24 @@ void Manager::checkEndedCommunications(){
 					}
 				}
 			}
+		}
+	}
+}
+
+void Manager::checkEndSimulation(){
+	while(true){
+		wait();
+		bool allDone = true;
+		for(int i = 0; i < N; i++){
+			for(int j = 0; j < M; j++){
+				if(finished_threads[i][j].read() == 0){
+					allDone = false;
+				}
+			}
+		}
+
+		if(allDone){
+			sc_stop();
 		}
 	}
 }
