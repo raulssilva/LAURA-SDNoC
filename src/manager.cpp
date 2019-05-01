@@ -28,13 +28,24 @@ void Manager::routeRequest(){
 void Manager::generateRoutes(){
 	while(true){
 		wait();
+		int request = -1;
 		if(requests_queue.size() > 0){
 			if(routing_algorithm.read()){
-				int srcX = get<0>(requests_queue[0]);
-				int srcY = get<1>(requests_queue[0]);
-				int destX = route_requestsX[srcX][srcY].read();
-				int destY = route_requestsY[srcX][srcY].read();
-				xy(srcX, srcY, destX, destY);
+				int srcX;
+				int srcY;
+				int destX;
+				int destY;
+				do{
+					request += 1;
+					if(request >= requests_queue.size()){
+						request = 0;
+					}
+					srcX = get<0>(requests_queue[request]);
+					srcY = get<1>(requests_queue[request]);
+					destX = route_requestsX[srcX][srcY].read();
+					destY = route_requestsY[srcX][srcY].read();
+					wait();
+				}while(!xy(srcX, srcY, destX, destY));
 			}else{
 				// dijkstra(requests_queue[0], route_requests[requests_queue[0]].read());
 			}
@@ -42,10 +53,10 @@ void Manager::generateRoutes(){
 
 		if(requests_queue.size() > 0){
 			for(int i = 0; i < paths.size(); i++){
-				if(paths[i][0] == requests_queue.front()){
+				if(paths[i][0] == requests_queue[request]){
 					if(available_channels[get<0>(paths[i][0])][get<1>(paths[i][0])] == 1){
-						wait();
-						requests_queue.erase(requests_queue.begin());
+						// wait();
+						requests_queue.erase(requests_queue.begin()+request);
 					}
 				}
 			}
@@ -53,12 +64,12 @@ void Manager::generateRoutes(){
 	}
 }
 
-void Manager::xy(int srcX, int srcY, int destX, int destY){
+bool Manager::xy(int srcX, int srcY, int destX, int destY){
 	for(int i = 0; i < paths.size(); i++){
 		tuple<int, int> destCore(destX, destY);
 		vector< tuple<int, int> > path = paths[i];
 		if(path[(path.size() - 1)] == destCore){
-			return;
+			return false;
 		}
 	}
 
@@ -67,7 +78,7 @@ void Manager::xy(int srcX, int srcY, int destX, int destY){
 
 	while(srcX < destX){
 		if(network[(srcX + srcY * N)][(srcX + 1 + srcY * N)] == 0){
-			return;
+			return false;
 		}
 
 		path.push_back(make_tuple((srcX + 1), srcY));
@@ -76,7 +87,7 @@ void Manager::xy(int srcX, int srcY, int destX, int destY){
 
 	while(srcX > destX){
 		if(network[(srcX + srcY * N)][(srcX - 1 + srcY * N)] == 0){
-			return;
+			return false;
 		}
 
 		path.push_back(make_tuple((srcX - 1), srcY));
@@ -85,7 +96,7 @@ void Manager::xy(int srcX, int srcY, int destX, int destY){
 
 	while(srcY < destY){
 		if(network[(srcX + srcY * N)][(srcX + (srcY + 1) * N)] == 0){
-			return;
+			return false;
 		}
 
 		path.push_back(make_tuple(srcX, (srcY + 1)));
@@ -94,7 +105,7 @@ void Manager::xy(int srcX, int srcY, int destX, int destY){
 
 	while(srcY > destY){
 		if(network[(srcX + srcY * N)][(srcX + (srcY - 1) * N)] == 0){
-			return;
+			return false;
 		}
 
 		path.push_back(make_tuple(srcX, (srcY - 1)));
@@ -109,6 +120,7 @@ void Manager::xy(int srcX, int srcY, int destX, int destY){
 
 	paths.push_back(path);
 	enableRoutes(path);
+	return true;
 }
 
 void Manager::enableRoutes(vector< tuple<int, int> > path){

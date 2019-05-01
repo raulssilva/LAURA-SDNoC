@@ -41,7 +41,7 @@ SC_MODULE(Manager){
 	vector< tuple<int, int> > requests_queue;
 
 	void dijkstra(int src, int dest);
-	void xy(int srcX, int srcY, int destX, int destY);
+	bool xy(int srcX, int srcY, int destX, int destY);
 	void enableRoutes(vector< tuple<int, int> > path);
 	void printNetwork();
 
