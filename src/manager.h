@@ -28,7 +28,6 @@ SC_MODULE(Manager){
 	// Behaviors
 	void routeRequest();
 	void generateRoutes();
-	void enableRoutes();
 	void checkEndedCommunications();
 	void checkEndSimulation();
 
@@ -43,6 +42,7 @@ SC_MODULE(Manager){
 
 	void dijkstra(int src, int dest);
 	void xy(int srcX, int srcY, int destX, int destY);
+	void enableRoutes(vector< tuple<int, int> > path);
 	void printNetwork();
 
 	SC_CTOR(Manager):
@@ -99,7 +99,6 @@ SC_MODULE(Manager){
 
 		SC_CTHREAD(routeRequest, clk.pos());
 		SC_CTHREAD(generateRoutes, clk.pos());
-		SC_CTHREAD(enableRoutes, clk.pos());
 		SC_CTHREAD(checkEndedCommunications, clk.pos());
 		SC_CTHREAD(checkEndSimulation, clk.pos());
 	}

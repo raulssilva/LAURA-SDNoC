@@ -44,6 +44,7 @@ void Manager::generateRoutes(){
 			for(int i = 0; i < paths.size(); i++){
 				if(paths[i][0] == requests_queue.front()){
 					if(available_channels[get<0>(paths[i][0])][get<1>(paths[i][0])] == 1){
+						wait();
 						requests_queue.erase(requests_queue.begin());
 					}
 				}
@@ -53,6 +54,14 @@ void Manager::generateRoutes(){
 }
 
 void Manager::xy(int srcX, int srcY, int destX, int destY){
+	for(int i = 0; i < paths.size(); i++){
+		tuple<int, int> destCore(destX, destY);
+		vector< tuple<int, int> > path = paths[i];
+		if(path[(path.size() - 1)] == destCore){
+			return;
+		}
+	}
+
 	vector< tuple<int, int> > path;
 	path.push_back(make_tuple(srcX, srcY));
 
@@ -99,139 +108,133 @@ void Manager::xy(int srcX, int srcY, int destX, int destY){
 	}
 
 	paths.push_back(path);
+	enableRoutes(path);
 }
 
-void Manager::enableRoutes(){
-	while(true){
-		wait();
-		for(int i = 0; i < paths.size(); i++){
-			vector< tuple<int, int> > path = paths[i];
+void Manager::enableRoutes(vector< tuple<int, int> > path){
+	for(int j = 0; j < (path.size() - 1); j++){
+		int currX = get<0>(path[j]);
+		int currY = get<1>(path[j]);
 
-			for(int j = 0; j < (path.size() - 1); j++){
-				int currX = get<0>(path[j]);
-				int currY = get<1>(path[j]);
+		int nextX = get<0>(path[j+1]);
+		int nextY = get<1>(path[j+1]);
 
-				int nextX = get<0>(path[j+1]);
-				int nextY = get<1>(path[j+1]);
+		if(j == 0){
+			if(nextX > currX){
+				enables[currX][currY] = enables[currX][currY] | 4; // 00100
+				switchers[currX][currY] = switchers[currX][currY] | 16; // 00 00 01 00 00
+				
+				swtBitsteam[currX][currY].write(switchers[currX][currY]);
+				enBitstream[currX][currY].write(enables[currX][currY]);
+			}else if(nextX < currX){
+				enables[currX][currY] = enables[currX][currY] | 8; // 01000
+				switchers[currX][currY] = switchers[currX][currY] | 0; // 00 00 00 00 00
+				
+				swtBitsteam[currX][currY].write(switchers[currX][currY]);
+				enBitstream[currX][currY].write(enables[currX][currY]);
+			}
 
-				if(j == 0){
-					if(nextX > currX){
-						enables[currX][currY] = enables[currX][currY] | 4; // 00100
-						switchers[currX][currY] = switchers[currX][currY] | 16; // 00 00 01 00 00
-						
-						swtBitsteam[currX][currY].write(switchers[currX][currY]);
-						enBitstream[currX][currY].write(enables[currX][currY]);
-					}else if(nextX < currX){
-						enables[currX][currY] = enables[currX][currY] | 8; // 01000
-						switchers[currX][currY] = switchers[currX][currY] | 0; // 00 00 00 00 00
-						
-						swtBitsteam[currX][currY].write(switchers[currX][currY]);
-						enBitstream[currX][currY].write(enables[currX][currY]);
-					}
+			if(nextY > currY){
+				enables[currX][currY] = enables[currX][currY] | 2; // 00010
+				switchers[currX][currY] = switchers[currX][currY] | 8; // 00 00 00 10 00
+				
+				swtBitsteam[currX][currY].write(switchers[currX][currY]);
+				enBitstream[currX][currY].write(enables[currX][currY]);
+			}else if(nextY < currY){
+				enables[currX][currY] = enables[currX][currY] | 1; // 00001
+				switchers[currX][currY] = switchers[currX][currY] | 3; // 00 00 00 00 11
+				
+				swtBitsteam[currX][currY].write(switchers[currX][currY]);
+				enBitstream[currX][currY].write(enables[currX][currY]);
+			}
+		}else{
+			int prevX = get<0>(path[j-1]);
+			int prevY = get<1>(path[j-1]);
+			if(nextX > currX){
+				enables[currX][currY] = enables[currX][currY] | 4; // 00100
+				enBitstream[currX][currY].write(enables[currX][currY]);
 
-					if(nextY > currY){
-						enables[currX][currY] = enables[currX][currY] | 2; // 00010
-						switchers[currX][currY] = switchers[currX][currY] | 8; // 00 00 00 10 00
-						
-						swtBitsteam[currX][currY].write(switchers[currX][currY]);
-						enBitstream[currX][currY].write(enables[currX][currY]);
-					}else if(nextY < currY){
-						enables[currX][currY] = enables[currX][currY] | 1; // 00001
-						switchers[currX][currY] = switchers[currX][currY] | 3; // 00 00 00 00 11
-						
-						swtBitsteam[currX][currY].write(switchers[currX][currY]);
-						enBitstream[currX][currY].write(enables[currX][currY]);
-					}
-				}else{
-					int prevX = get<0>(path[j-1]);
-					int prevY = get<1>(path[j-1]);
-					if(nextX > currX){
-						enables[currX][currY] = enables[currX][currY] | 4; // 00100
-						enBitstream[currX][currY].write(enables[currX][currY]);
+				if(prevX < currX){
+					switchers[currX][currY] = switchers[currX][currY] | 0; // 00 00 00 00 00
+					swtBitsteam[currX][currY].write(switchers[currX][currY]);
+				}else if(prevY > currY){
+					switchers[currX][currY] = switchers[currX][currY] | 32; // 00 00 10 00 00
+					swtBitsteam[currX][currY].write(switchers[currX][currY]);
+				}else if(prevY < currY){
+					switchers[currX][currY] = switchers[currX][currY] | 48; // 00 00 11 00 00
+					swtBitsteam[currX][currY].write(switchers[currX][currY]);
+				}
+			}else if(nextX < currX){
+				enables[currX][currY] = enables[currX][currY] | 8; // 01000
+				enBitstream[currX][currY].write(enables[currX][currY]);
 
-						if(prevX < currX){
-							switchers[currX][currY] = switchers[currX][currY] | 0; // 00 00 00 00 00
-							swtBitsteam[currX][currY].write(switchers[currX][currY]);
-						}else if(prevY > currY){
-							switchers[currX][currY] = switchers[currX][currY] | 32; // 00 00 10 00 00
-							swtBitsteam[currX][currY].write(switchers[currX][currY]);
-						}else if(prevY < currY){
-							switchers[currX][currY] = switchers[currX][currY] | 48; // 00 00 11 00 00
-							swtBitsteam[currX][currY].write(switchers[currX][currY]);
-						}
-					}else if(nextX < currX){
-						enables[currX][currY] = enables[currX][currY] | 8; // 01000
-						enBitstream[currX][currY].write(enables[currX][currY]);
-
-						if(prevX > currX){
-							switchers[currX][currY] = switchers[currX][currY] | 64; // 00 01 00 00 00
-							swtBitsteam[currX][currY].write(switchers[currX][currY]);
-						}else if(prevY > currY){
-							switchers[currX][currY] = switchers[currX][currY] | 128; // 00 10 00 00 00
-							swtBitsteam[currX][currY].write(switchers[currX][currY]);
-						}else if(prevY < currY){
-							switchers[currX][currY] = switchers[currX][currY] | 192; // 00 11 00 00 00
-							swtBitsteam[currX][currY].write(switchers[currX][currY]);
-						}
-					}
-
-					if(nextY > currY){
-						enables[currX][currY] = enables[currX][currY] | 2; // 00010
-						enBitstream[currX][currY].write(enables[currX][currY]);
-
-						if(prevX < currX){
-							switchers[currX][currY] = switchers[currX][currY] | 0; // 00 00 00 00 00
-							swtBitsteam[currX][currY].write(switchers[currX][currY]);
-						}else if(prevX > currX){
-							switchers[currX][currY] = switchers[currX][currY] | 4; // 00 00 00 01 00
-							swtBitsteam[currX][currY].write(switchers[currX][currY]);
-						}else if(prevY < currY){
-							switchers[currX][currY] = switchers[currX][currY] | 12; // 00 00 00 11 00
-							swtBitsteam[currX][currY].write(switchers[currX][currY]);
-						}
-					}else if(nextY < currY){
-						enables[currX][currY] = enables[currX][currY] | 1; // 00001
-						enBitstream[currX][currY].write(enables[currX][currY]);
-
-						if(prevX < currX){
-							switchers[currX][currY] = switchers[currX][currY] | 0; // 00 00 00 00 00
-							swtBitsteam[currX][currY].write(switchers[currX][currY]);
-						}else if(prevX > currX){
-							switchers[currX][currY] = switchers[currX][currY] | 1; // 00 00 00 00 01
-							swtBitsteam[currX][currY].write(switchers[currX][currY]);
-						}else if(prevY > currY){
-							switchers[currX][currY] = switchers[currX][currY] | 2; // 00 00 00 00 10
-							swtBitsteam[currX][currY].write(switchers[currX][currY]);
-						}
-					}
+				if(prevX > currX){
+					switchers[currX][currY] = switchers[currX][currY] | 64; // 00 01 00 00 00
+					swtBitsteam[currX][currY].write(switchers[currX][currY]);
+				}else if(prevY > currY){
+					switchers[currX][currY] = switchers[currX][currY] | 128; // 00 10 00 00 00
+					swtBitsteam[currX][currY].write(switchers[currX][currY]);
+				}else if(prevY < currY){
+					switchers[currX][currY] = switchers[currX][currY] | 192; // 00 11 00 00 00
+					swtBitsteam[currX][currY].write(switchers[currX][currY]);
 				}
 			}
 
-			int currX = get<0>(path[path.size() - 1]);
-			int currY = get<1>(path[path.size() - 1]);
-			int prevX = get<0>(path[path.size() - 2]);
-			int prevY = get<1>(path[path.size() - 2]);
+			if(nextY > currY){
+				enables[currX][currY] = enables[currX][currY] | 2; // 00010
+				enBitstream[currX][currY].write(enables[currX][currY]);
 
-			enables[currX][currY] = enables[currX][currY] | 16; // 10000
-			enBitstream[currX][currY].write(enables[currX][currY]);
+				if(prevX < currX){
+					switchers[currX][currY] = switchers[currX][currY] | 0; // 00 00 00 00 00
+					swtBitsteam[currX][currY].write(switchers[currX][currY]);
+				}else if(prevX > currX){
+					switchers[currX][currY] = switchers[currX][currY] | 4; // 00 00 00 01 00
+					swtBitsteam[currX][currY].write(switchers[currX][currY]);
+				}else if(prevY < currY){
+					switchers[currX][currY] = switchers[currX][currY] | 12; // 00 00 00 11 00
+					swtBitsteam[currX][currY].write(switchers[currX][currY]);
+				}
+			}else if(nextY < currY){
+				enables[currX][currY] = enables[currX][currY] | 1; // 00001
+				enBitstream[currX][currY].write(enables[currX][currY]);
 
-			if(prevX < currX){
-				switchers[currX][currY] = switchers[currX][currY] | 0; // 00 00 00 00 00
-				swtBitsteam[currX][currY].write(switchers[currX][currY]);
-			}else if(prevX > currX){
-				switchers[currX][currY] = switchers[currX][currY] | 256; // 01 00 00 00 00
-				swtBitsteam[currX][currY].write(switchers[currX][currY]);
-			}else if(prevY < currY){
-				switchers[currX][currY] = switchers[currX][currY] | 768; // 11 00 00 00 00
-				swtBitsteam[currX][currY].write(switchers[currX][currY]);
-			}else if(prevY > currY){
-				switchers[currX][currY] = switchers[currX][currY] | 512; // 10 00 00 00 00
-				swtBitsteam[currX][currY].write(switchers[currX][currY]);
+				if(prevX < currX){
+					switchers[currX][currY] = switchers[currX][currY] | 0; // 00 00 00 00 00
+					swtBitsteam[currX][currY].write(switchers[currX][currY]);
+				}else if(prevX > currX){
+					switchers[currX][currY] = switchers[currX][currY] | 1; // 00 00 00 00 01
+					swtBitsteam[currX][currY].write(switchers[currX][currY]);
+				}else if(prevY > currY){
+					switchers[currX][currY] = switchers[currX][currY] | 2; // 00 00 00 00 10
+					swtBitsteam[currX][currY].write(switchers[currX][currY]);
+				}
 			}
-
-			available_channels[get<0>(path[0])][get<1>(path[0])].write(true);
 		}
 	}
+
+	int currX = get<0>(path[path.size() - 1]);
+	int currY = get<1>(path[path.size() - 1]);
+	int prevX = get<0>(path[path.size() - 2]);
+	int prevY = get<1>(path[path.size() - 2]);
+
+	enables[currX][currY] = enables[currX][currY] | 16; // 10000
+	enBitstream[currX][currY].write(enables[currX][currY]);
+
+	if(prevX < currX){
+		switchers[currX][currY] = switchers[currX][currY] | 0; // 00 00 00 00 00
+		swtBitsteam[currX][currY].write(switchers[currX][currY]);
+	}else if(prevX > currX){
+		switchers[currX][currY] = switchers[currX][currY] | 256; // 01 00 00 00 00
+		swtBitsteam[currX][currY].write(switchers[currX][currY]);
+	}else if(prevY < currY){
+		switchers[currX][currY] = switchers[currX][currY] | 768; // 11 00 00 00 00
+		swtBitsteam[currX][currY].write(switchers[currX][currY]);
+	}else if(prevY > currY){
+		switchers[currX][currY] = switchers[currX][currY] | 512; // 10 00 00 00 00
+		swtBitsteam[currX][currY].write(switchers[currX][currY]);
+	}
+
+	available_channels[get<0>(path[0])][get<1>(path[0])].write(true);
 }
 
 void Manager::checkEndedCommunications(){
@@ -372,7 +375,6 @@ void Manager::checkEndedCommunications(){
 							}
 
 							available_channels[get<0>(path[0])][get<1>(path[0])].write(false);
-
 							paths.erase(paths.begin()+k);
 						}
 					}

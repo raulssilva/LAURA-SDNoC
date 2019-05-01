@@ -17,6 +17,8 @@ void Core::requestRoute(){
 						while(channel_available.read() != 1){
 							wait();
 						}
+
+						cout << name() << " Request Accepted at:" << sc_time_stamp() << endl;
 						requested_coreX.write(-1);
 						requested_coreY.write(-1);
 
