@@ -5,6 +5,7 @@
 #include <iostream>
 #include <vector>
 #include <tuple>
+#include <limits>
 #include "constants.h"
 
 using namespace std;
@@ -23,8 +24,6 @@ SC_MODULE(Manager){
 	sc_out< sc_uint<ROUTERS_SWITCHERS> > swtBitsteam[N][M];
 	sc_out< sc_uint<ROUTERS_ENABLES> > enBitstream[N][M];
 
-	// Messages
-
 	// Behaviors
 	void routeRequest();
 	void generateRoutes();
@@ -40,7 +39,7 @@ SC_MODULE(Manager){
 	// Requests queue
 	vector< tuple<int, int> > requests_queue;
 
-	void dijkstra(int src, int dest);
+	bool dijkstra(int srcX, int srcY, int destX, int destY);
 	bool xy(int srcX, int srcY, int destX, int destY);
 	void enableRoutes(vector< tuple<int, int> > path);
 	void printNetwork();
@@ -49,7 +48,6 @@ SC_MODULE(Manager){
 		clk("noc_clock"),
 		routing_algorithm("routing_algorithm")
 	{
-
 		for(int i = 0; i < N; i++){
 			for(int j = 0; j < M; j++){
 				switchers[i][j] = 0;

@@ -47,7 +47,21 @@ void Manager::generateRoutes(){
 					wait();
 				}while(!xy(srcX, srcY, destX, destY));
 			}else{
-				// dijkstra(requests_queue[0], route_requests[requests_queue[0]].read());
+				int srcX;
+				int srcY;
+				int destX;
+				int destY;
+				do{
+					request += 1;
+					if(request >= requests_queue.size()){
+						request = 0;
+					}
+					srcX = get<0>(requests_queue[request]);
+					srcY = get<1>(requests_queue[request]);
+					destX = route_requestsX[srcX][srcY].read();
+					destY = route_requestsY[srcX][srcY].read();
+					wait();
+				}while(!dijkstra(srcX, srcY, destX, destY));
 			}
 		}
 
@@ -117,6 +131,122 @@ bool Manager::xy(int srcX, int srcY, int destX, int destY){
 		int yValue = get<0>(path[i+1]) + get<1>(path[i+1]) * N;
 		network[xValue][yValue] = 0;
 	}
+
+	paths.push_back(path);
+	enableRoutes(path);
+	return true;
+}
+
+bool Manager::dijkstra(int srcX, int srcY, int destX, int destY){
+	for(int i = 0; i < paths.size(); i++){
+		tuple<int, int> destCore(destX, destY);
+		tuple<int, int> srcCore(srcX, srcY);
+
+		vector< tuple<int, int> > path = paths[i];
+		if(path[(path.size() - 1)] == destCore || path[0] == srcCore){
+			return false;
+		}
+	}
+
+	int d[N*M]; // Distance from s to d[v]
+	tuple<int, int> pi[N*M]; // Origin vertex to reach v
+	vector<int> q; // Set of verteces which do not have the shortest distance to s
+
+	for(int i = 0; i < N*M; i++){
+		d[i] = INT_MAX;
+		pi[i] = make_tuple(-1, -1);
+	}
+	
+	d[(srcX * N + srcY)] = 0;
+
+	for(int i = 0; i < N*M; i++){
+		if(network[(srcX * N + srcY)][i] > 0){
+			d[i] = network[(srcX * N + srcY)][i];
+			pi[i] = make_tuple(srcX, srcY);
+		}
+	}
+
+	for(int i = 0; i < N*M; i++){
+		if(d[i] != 0){
+			q.push_back(i);
+		}
+	}
+
+	while(!q.empty()){
+		int u = q.front();
+		int vertexIndex = 0;
+		for(int i = 0; i < q.size(); i++){
+			if(d[q[i]] < d[u]){
+				u = q[i];
+				vertexIndex = i;
+			}
+		}
+
+		q.erase(q.begin() + vertexIndex);
+
+		for(int i = 0; i < N*M; i++){
+			if(network[u][i] > 0){
+				if(d[i] > (d[u] + network[u][i])){
+					d[i] = d[u] + network[u][i];
+					pi[i] = make_tuple((u/N), (u%M));
+				}
+			}
+		}
+	}
+
+	int vertex = (destX * N + destY);
+	vector< tuple<int, int> > reversePath;
+	vector< tuple<int, int> > path;
+
+	if(d[vertex] == INT_MAX){
+		return false;
+	}
+
+	tuple<int, int> destiny(destX, destY);
+	reversePath.push_back(destiny);
+	if(destX < 0 || destY < 0){
+		return false;
+	}
+
+	int loopDetector = -1;
+
+	do{
+		if(get<0>(pi[vertex]) < 0 || get<1>(pi[vertex]) < 0){
+			return false;
+		}
+
+		tuple<int, int> node(get<0>(pi[vertex]), get<1>(pi[vertex]));
+		reversePath.push_back(node);
+		int newX = get<0>(pi[vertex]) * N;
+		int newY = get<1>(pi[vertex]);
+		vertex = newX + newY;
+		loopDetector++;
+		if(loopDetector > N*M){
+			return false;
+		}
+	}while(vertex != (srcX * N + srcY));
+
+	for(int i = (reversePath.size() - 1); i >= 0; i--){
+		int currX = get<0>(reversePath[i]);
+		int currY = get<1>(reversePath[i]);
+
+		if(currX < 0 || currY < 0){
+			return false;
+		}
+
+		path.push_back(reversePath[i]);
+	}
+
+	for(int i = 0; i < path.size() - 1; i++){
+		int xValue = get<0>(path[i]) * N + get<1>(path[i]);
+		int yValue = get<0>(path[i+1]) * N + get<1>(path[i+1]);
+		network[xValue][yValue] = 0;
+	}
+
+	// for(int i = 0; i < path.size(); i++){
+	// 	cout << get<0>(path[i]) << get<1>(path[i]) << "->";
+	// }
+	// cout << endl;
 
 	paths.push_back(path);
 	enableRoutes(path);
@@ -261,8 +391,17 @@ void Manager::checkEndedCommunications(){
 						vector< tuple<int, int> > path = paths[k];
 						if(path[path.size() - 1] == destCore){
 							for(int l = 0; l < path.size() - 1; l++){
-								int xValue = get<0>(path[l]) + get<1>(path[l]) * N;
-								int yValue = get<0>(path[l+1]) + get<1>(path[l+1]) * N;
+								int xValue;
+								int yValue;
+
+								if(routing_algorithm.read()){
+									xValue = get<0>(path[l]) + get<1>(path[l]) * N;
+									yValue = get<0>(path[l+1]) + get<1>(path[l+1]) * N;
+								}else{
+									xValue = get<0>(path[l]) * N + get<1>(path[l]);
+									yValue = get<0>(path[l+1]) * N + get<1>(path[l+1]);
+								}
+
 								network[xValue][yValue] = 1;
 
 								int currX = get<0>(path[l]);

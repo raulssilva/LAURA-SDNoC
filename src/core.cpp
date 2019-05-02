@@ -28,6 +28,9 @@ void Core::requestRoute(){
 
 						while(channel_available.read() == 1){
 							cyclesElapsed = sc_time_stamp().value()/1000;
+							if(idleCycles.size() == 0){
+								break;
+							}
 							wait();
 						}
 						cyclesElapsed = 0;
