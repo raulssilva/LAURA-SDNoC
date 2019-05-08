@@ -1,0 +1,45 @@
+------------------ BEGIN SIMULATION ------------------
+Laura_Network.core_0_3 Requesting route at: 4 ns
+Laura_Network.core_1_0 Requesting route at: 4 ns
+Laura_Network.core_2_1 Requesting route at: 4 ns
+Laura_Network.core_2_2 Requesting route at: 4 ns
+Laura_Network.core_0_0 Requesting route at: 5 ns
+Laura_Network.core_2_0 Requesting route at: 5 ns
+Laura_Network.core_0_1 Requesting route at: 6 ns
+Laura_Network.core_1_1 Requesting route at: 6 ns
+Laura_Network.core_0_2 Requesting route at: 7 ns
+Laura_Network.core_1_2 Requesting route at: 7 ns
+Laura_Network.core_1_3 Requesting route at: 7 ns
+Laura_Network.core_3_1 Requesting route at: 7 ns
+Laura_Network.core_0_3 Request Accepted at:8 ns
+Laura_Network.core_1_0 Request Accepted at:11 ns
+Laura_Network.core_2_2 Request Accepted at:16 ns
+Laura_Network.core_0_0 Request Accepted at:22 ns
+Laura_Network.core_2_0 Request Accepted at:29 ns
+Laura_Network.core_2_1 Request Accepted at:33 ns
+Laura_Network.core_1_0 Requesting route at: 35 ns
+Laura_Network.core_0_1 Request Accepted at:41 ns
+Laura_Network.core_1_0 Request Accepted at:44 ns
+Laura_Network.core_0_0 Requesting route at: 51 ns
+Laura_Network.core_1_1 Request Accepted at:53 ns
+Laura_Network.core_2_1 Requesting route at: 53 ns
+Laura_Network.core_2_0 Requesting route at: 56 ns
+Laura_Network.core_2_1 Request Accepted at:57 ns
+Laura_Network.core_0_0 Request Accepted at:63 ns
+Laura_Network.core_0_1 Requesting route at: 69 ns
+Laura_Network.core_2_0 Request Accepted at:70 ns
+Laura_Network.core_0_1 Request Accepted at:78 ns
+Laura_Network.core_0_2 Request Accepted at:88 ns
+Laura_Network.core_0_0 Requesting route at: 93 ns
+Laura_Network.core_1_2 Request Accepted at:99 ns
+Laura_Network.core_2_0 Requesting route at: 99 ns
+Laura_Network.core_0_0 Request Accepted at:105 ns
+Laura_Network.core_0_1 Requesting route at: 110 ns
+Laura_Network.core_2_0 Request Accepted at:112 ns
+Laura_Network.core_0_1 Request Accepted at:120 ns
+Laura_Network.core_1_3 Request Accepted at:132 ns
+Laura_Network.core_3_1 Request Accepted at:145 ns
+Ending at: 170 ns
+
+Info: /OSCI/SystemC: Simulation stopped by user.
+------------------- END SIMULATION -------------------

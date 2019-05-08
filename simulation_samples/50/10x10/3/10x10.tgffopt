@@ -1,0 +1,16 @@
+seed 2
+period_mul 1
+task_degree 50 10
+tg_cnt 1
+task_cnt 100 1
+trans_type_cnt 60
+task_unique
+
+table_cnt 1
+table_label COMMUN_ATTR
+type_attrib IdleCycles 10 6 0 1, Packages 20 5 0 1
+trans_write
+
+tg_write
+eps_write
+vcg_write

@@ -1,0 +1,136 @@
+@HYPERPERIOD 400
+
+@COMMUN_ATTR 0 {
+#         price
+        5.68728
+
+#------------------------------------------------------------------------------
+# type    IdleCycles     Packages
+      0            7           17
+      1            7           17
+      2            6           17
+      3            4           15
+      4           10           20
+      5           11           21
+      6           10           20
+      7           11           21
+      8            4           15
+      9            9           19
+     10            4           15
+     11           11           21
+     12            6           17
+     13            4           15
+     14            9           19
+     15            5           15
+     16            5           16
+     17            5           16
+     18            8           18
+     19            7           17
+     20            4           15
+     21           10           20
+     22           11           21
+     23            5           16
+     24            5           15
+     25            5           16
+     26            9           20
+     27            7           18
+     28            6           16
+     29            4           15
+     30            7           17
+     31            7           17
+     32            5           16
+     33            6           17
+     34            5           16
+     35           11           21
+     36            5           16
+     37            9           19
+     38           10           20
+     39            5           16
+     40            9           19
+     41            6           17
+     42            4           15
+     43            9           19
+     44           10           20
+     45            4           15
+     46           11           21
+     47            4           15
+     48            6           16
+     49            5           16
+     50            5           16
+     51            5           16
+     52            6           17
+     53            4           15
+     54            5           16
+     55           10           20
+     56            5           16
+     57            9           19
+     58            7           17
+     59            9           19
+}
+
+
+
+@TASK_GRAPH 0 {
+	PERIOD 400
+
+	TASK t0_0	TYPE 0 
+	TASK t0_1	TYPE 1 
+	TASK t0_2	TYPE 2 
+	TASK t0_3	TYPE 3 
+	TASK t0_4	TYPE 4 
+	TASK t0_5	TYPE 5 
+	TASK t0_6	TYPE 6 
+	TASK t0_7	TYPE 7 
+	TASK t0_8	TYPE 8 
+	TASK t0_9	TYPE 9 
+	TASK t0_10	TYPE 10 
+	TASK t0_11	TYPE 11 
+	TASK t0_12	TYPE 12 
+	TASK t0_13	TYPE 13 
+	TASK t0_14	TYPE 14 
+	TASK t0_15	TYPE 15 
+
+	ARC a0_0 	FROM t0_0  TO  t0_1 TYPE 25
+	ARC a0_1 	FROM t0_0  TO  t0_2 TYPE 52
+	ARC a0_2 	FROM t0_0  TO  t0_3 TYPE 4
+	ARC a0_3 	FROM t0_0  TO  t0_4 TYPE 14
+	ARC a0_4 	FROM t0_0  TO  t0_5 TYPE 32
+	ARC a0_5 	FROM t0_0  TO  t0_6 TYPE 57
+	ARC a0_6 	FROM t0_0  TO  t0_7 TYPE 13
+	ARC a0_7 	FROM t0_0  TO  t0_8 TYPE 18
+	ARC a0_8 	FROM t0_0  TO  t0_9 TYPE 36
+	ARC a0_9 	FROM t0_0  TO  t0_10 TYPE 16
+	ARC a0_10 	FROM t0_6  TO  t0_11 TYPE 59
+	ARC a0_11 	FROM t0_8  TO  t0_11 TYPE 56
+	ARC a0_12 	FROM t0_2  TO  t0_11 TYPE 45
+	ARC a0_13 	FROM t0_10  TO  t0_11 TYPE 0
+	ARC a0_14 	FROM t0_4  TO  t0_11 TYPE 42
+	ARC a0_15 	FROM t0_1  TO  t0_11 TYPE 34
+	ARC a0_16 	FROM t0_7  TO  t0_11 TYPE 6
+	ARC a0_17 	FROM t0_3  TO  t0_11 TYPE 13
+	ARC a0_18 	FROM t0_5  TO  t0_11 TYPE 17
+	ARC a0_19 	FROM t0_8  TO  t0_12 TYPE 47
+	ARC a0_20 	FROM t0_4  TO  t0_12 TYPE 44
+	ARC a0_21 	FROM t0_9  TO  t0_13 TYPE 36
+	ARC a0_22 	FROM t0_9  TO  t0_14 TYPE 33
+	ARC a0_23 	FROM t0_6  TO  t0_15 TYPE 43
+	ARC a0_24 	FROM t0_14  TO  t0_15 TYPE 50
+	ARC a0_25 	FROM t0_1  TO  t0_15 TYPE 11
+	ARC a0_26 	FROM t0_12  TO  t0_15 TYPE 28
+	ARC a0_27 	FROM t0_5  TO  t0_15 TYPE 49
+	ARC a0_28 	FROM t0_3  TO  t0_15 TYPE 55
+	ARC a0_29 	FROM t0_13  TO  t0_15 TYPE 54
+	ARC a0_30 	FROM t0_2  TO  t0_15 TYPE 58
+	ARC a0_31 	FROM t0_4  TO  t0_15 TYPE 51
+	ARC a0_32 	FROM t0_10  TO  t0_15 TYPE 4
+	ARC a0_33 	FROM t0_11  TO  t0_15 TYPE 48
+	ARC a0_34 	FROM t0_7  TO  t0_15 TYPE 10
+	ARC a0_35 	FROM t0_8  TO  t0_15 TYPE 15
+
+	HARD_DEADLINE d0_0 ON t0_15 AT 400
+}
+
+
+
+
+

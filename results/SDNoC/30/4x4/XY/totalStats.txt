@@ -1,0 +1,3 @@
+Avrg Delay: 23.5275
+MaxDelay: 337
+TotalCycles: 311

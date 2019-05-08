@@ -548,6 +548,7 @@ void Manager::checkEndSimulation(){
 		}
 
 		if(allDone){
+			cout << "Ending at: " << sc_time_stamp() << endl;
 			sc_stop();
 		}
 	}

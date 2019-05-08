@@ -1,0 +1,55 @@
+------------------ BEGIN SIMULATION ------------------
+Laura_Network.core_0_3 Requesting route at: 4 ns
+Laura_Network.core_1_2 Requesting route at: 4 ns
+Laura_Network.core_0_0 Requesting route at: 5 ns
+Laura_Network.core_0_1 Requesting route at: 5 ns
+Laura_Network.core_0_2 Requesting route at: 6 ns
+Laura_Network.core_1_0 Requesting route at: 6 ns
+Laura_Network.core_0_4 Requesting route at: 7 ns
+Laura_Network.core_0_3 Request Accepted at:8 ns
+Laura_Network.core_1_2 Request Accepted at:11 ns
+Laura_Network.core_0_0 Request Accepted at:15 ns
+Laura_Network.core_0_1 Request Accepted at:20 ns
+Laura_Network.core_0_2 Request Accepted at:26 ns
+Laura_Network.core_0_3 Requesting route at: 31 ns
+Laura_Network.core_0_4 Request Accepted at:34 ns
+Laura_Network.core_0_3 Request Accepted at:36 ns
+Laura_Network.core_1_0 Request Accepted at:43 ns
+Laura_Network.core_0_0 Requesting route at: 44 ns
+Laura_Network.core_0_0 Request Accepted at:47 ns
+Laura_Network.core_0_1 Requesting route at: 48 ns
+Laura_Network.core_0_1 Request Accepted at:52 ns
+Laura_Network.core_0_2 Requesting route at: 54 ns
+Laura_Network.core_0_2 Request Accepted at:58 ns
+Laura_Network.core_0_3 Requesting route at: 63 ns
+Laura_Network.core_0_3 Request Accepted at:67 ns
+Laura_Network.core_0_0 Requesting route at: 74 ns
+Laura_Network.core_0_0 Request Accepted at:78 ns
+Laura_Network.core_0_1 Requesting route at: 79 ns
+Laura_Network.core_0_1 Request Accepted at:83 ns
+Laura_Network.core_0_2 Requesting route at: 85 ns
+Laura_Network.core_0_2 Request Accepted at:89 ns
+Laura_Network.core_0_3 Requesting route at: 94 ns
+Laura_Network.core_0_3 Request Accepted at:98 ns
+Laura_Network.core_0_0 Requesting route at: 105 ns
+Laura_Network.core_0_1 Requesting route at: 106 ns
+Laura_Network.core_0_0 Request Accepted at:109 ns
+Laura_Network.core_0_1 Request Accepted at:114 ns
+Laura_Network.core_0_3 Requesting route at: 126 ns
+Laura_Network.core_0_3 Request Accepted at:130 ns
+Laura_Network.core_0_0 Requesting route at: 139 ns
+Laura_Network.core_0_1 Requesting route at: 139 ns
+Laura_Network.core_0_1 Request Accepted at:142 ns
+Laura_Network.core_0_0 Request Accepted at:146 ns
+Laura_Network.core_0_3 Requesting route at: 157 ns
+Laura_Network.core_0_3 Request Accepted at:162 ns
+Laura_Network.core_0_1 Requesting route at: 170 ns
+Laura_Network.core_0_1 Request Accepted at:174 ns
+Laura_Network.core_0_0 Requesting route at: 175 ns
+Laura_Network.core_0_0 Request Accepted at:178 ns
+Laura_Network.core_0_0 Requesting route at: 205 ns
+Laura_Network.core_0_0 Request Accepted at:210 ns
+Ending at: 236 ns
+
+Info: /OSCI/SystemC: Simulation stopped by user.
+------------------- END SIMULATION -------------------

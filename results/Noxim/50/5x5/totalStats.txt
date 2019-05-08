@@ -1,0 +1,2 @@
+Avrg: 8.50588
+MaxDelay: 19

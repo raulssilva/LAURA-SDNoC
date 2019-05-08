@@ -50,7 +50,7 @@ void Core::requestRoute(){
 void Core::sendPackages(){
 	for(int i = 0; i < numPckgs.front(); i++){
 		wait();
-		cout << name() << " Send: " << (numPckgs.front() - i) << " At:" << sc_time_stamp() << endl;
+		// cout << name() << " Send: " << (numPckgs.front() - i) << " At:" << sc_time_stamp() << endl;
 		data_out.write((numPckgs.front() - i));
 	}
 
@@ -61,7 +61,7 @@ void Core::sendPackages(){
 void Core::receivePackages(){
 	last_pckgReceived.write(false);
 	if(data_in.read() != 4294967295 && data_in.read() != 0){
-		cout << name() << " Receiving: " << data_in.read() << " At:" << sc_time_stamp() << endl;
+		// cout << name() << " Receiving: " << data_in.read() << " At:" << sc_time_stamp() << endl;
 	}
 
 	if(data_in.read() == 2){

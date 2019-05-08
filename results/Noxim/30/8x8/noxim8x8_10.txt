@@ -1,0 +1,17 @@
+Loading configuration from file "../config_examples/Raul/8x8_config.yaml"... Done
+Loading power configurations from file "power.yaml"... Done
+
+Info: /OSCI/SystemC: Simulation stopped by user.
+% Total received packets: 3791
+% Total received flits: 3791
+% Received/Ideal flits Ratio: 3.04515e-06
+% Average wireless utilization: 0
+% Global average delay (cycles): 11.2084
+% Max delay (cycles): 26
+% Network throughput (flits/cycle): 3.11824e-06
+% Average IP throughput (flits/cycle/IP): 4.87224e-08
+% Total energy (J): 1.6224e-05
+% 	Dynamic energy (J): 2.08653e-07
+% 	Static energy (J): 1.60153e-05
+
+---------------------------------

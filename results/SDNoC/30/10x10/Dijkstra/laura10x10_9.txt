@@ -1,0 +1,307 @@
+------------------ BEGIN SIMULATION ------------------
+Laura_Network.core_0_0 Requesting route at: 1 ns
+Laura_Network.core_0_1 Requesting route at: 1 ns
+Laura_Network.core_0_2 Requesting route at: 1 ns
+Laura_Network.core_0_4 Requesting route at: 1 ns
+Laura_Network.core_0_5 Requesting route at: 1 ns
+Laura_Network.core_0_7 Requesting route at: 1 ns
+Laura_Network.core_0_9 Requesting route at: 1 ns
+Laura_Network.core_1_1 Requesting route at: 1 ns
+Laura_Network.core_1_8 Requesting route at: 1 ns
+Laura_Network.core_1_9 Requesting route at: 1 ns
+Laura_Network.core_2_2 Requesting route at: 1 ns
+Laura_Network.core_2_3 Requesting route at: 1 ns
+Laura_Network.core_2_4 Requesting route at: 1 ns
+Laura_Network.core_2_7 Requesting route at: 1 ns
+Laura_Network.core_3_0 Requesting route at: 1 ns
+Laura_Network.core_3_1 Requesting route at: 1 ns
+Laura_Network.core_3_2 Requesting route at: 1 ns
+Laura_Network.core_3_3 Requesting route at: 1 ns
+Laura_Network.core_3_5 Requesting route at: 1 ns
+Laura_Network.core_3_6 Requesting route at: 1 ns
+Laura_Network.core_4_1 Requesting route at: 1 ns
+Laura_Network.core_4_4 Requesting route at: 1 ns
+Laura_Network.core_4_5 Requesting route at: 1 ns
+Laura_Network.core_5_2 Requesting route at: 1 ns
+Laura_Network.core_5_3 Requesting route at: 1 ns
+Laura_Network.core_5_4 Requesting route at: 1 ns
+Laura_Network.core_6_3 Requesting route at: 1 ns
+Laura_Network.core_0_6 Requesting route at: 2 ns
+Laura_Network.core_0_8 Requesting route at: 2 ns
+Laura_Network.core_1_2 Requesting route at: 2 ns
+Laura_Network.core_1_3 Requesting route at: 2 ns
+Laura_Network.core_1_4 Requesting route at: 2 ns
+Laura_Network.core_1_5 Requesting route at: 2 ns
+Laura_Network.core_1_6 Requesting route at: 2 ns
+Laura_Network.core_1_7 Requesting route at: 2 ns
+Laura_Network.core_2_5 Requesting route at: 2 ns
+Laura_Network.core_2_6 Requesting route at: 2 ns
+Laura_Network.core_3_4 Requesting route at: 2 ns
+Laura_Network.core_4_2 Requesting route at: 2 ns
+Laura_Network.core_1_0 Requesting route at: 3 ns
+Laura_Network.core_2_0 Requesting route at: 3 ns
+Laura_Network.core_2_1 Requesting route at: 3 ns
+Laura_Network.core_4_3 Requesting route at: 3 ns
+Laura_Network.core_0_0 Request Accepted at:5 ns
+Laura_Network.core_0_1 Request Accepted at:8 ns
+Laura_Network.core_0_2 Request Accepted at:12 ns
+Laura_Network.core_0_4 Request Accepted at:17 ns
+Laura_Network.core_0_7 Request Accepted at:24 ns
+Laura_Network.core_0_1 Requesting route at: 34 ns
+Laura_Network.core_0_2 Requesting route at: 36 ns
+Laura_Network.core_0_0 Requesting route at: 38 ns
+Laura_Network.core_2_4 Request Accepted at:38 ns
+Laura_Network.core_0_1 Request Accepted at:41 ns
+Laura_Network.core_0_0 Request Accepted at:43 ns
+Laura_Network.core_0_2 Request Accepted at:47 ns
+Laura_Network.core_0_7 Requesting route at: 47 ns
+Laura_Network.core_1_1 Request Accepted at:56 ns
+Laura_Network.core_2_4 Requesting route at: 61 ns
+Laura_Network.core_0_5 Request Accepted at:62 ns
+Laura_Network.core_0_1 Requesting route at: 67 ns
+Laura_Network.core_0_2 Requesting route at: 70 ns
+Laura_Network.core_0_0 Requesting route at: 76 ns
+Laura_Network.core_1_1 Requesting route at: 85 ns
+Laura_Network.core_4_5 Request Accepted at:86 ns
+Laura_Network.core_0_5 Requesting route at: 87 ns
+Laura_Network.core_0_0 Request Accepted at:88 ns
+Laura_Network.core_0_1 Request Accepted at:91 ns
+Laura_Network.core_0_2 Request Accepted at:95 ns
+Laura_Network.core_0_5 Request Accepted at:101 ns
+Laura_Network.core_1_9 Request Accepted at:112 ns
+Laura_Network.core_0_2 Requesting route at: 118 ns
+Laura_Network.core_0_0 Requesting route at: 121 ns
+Laura_Network.core_0_1 Requesting route at: 122 ns
+Laura_Network.core_3_3 Request Accepted at:131 ns
+Laura_Network.core_0_0 Request Accepted at:133 ns
+Laura_Network.core_0_1 Request Accepted at:136 ns
+Laura_Network.core_0_2 Request Accepted at:140 ns
+Laura_Network.core_0_7 Request Accepted at:147 ns
+Laura_Network.core_3_3 Requesting route at: 154 ns
+Laura_Network.core_2_2 Request Accepted at:159 ns
+Laura_Network.core_0_0 Requesting route at: 164 ns
+Laura_Network.core_0_1 Requesting route at: 165 ns
+Laura_Network.core_0_2 Requesting route at: 167 ns
+Laura_Network.core_2_7 Request Accepted at:174 ns
+Laura_Network.core_0_0 Request Accepted at:176 ns
+Laura_Network.core_0_1 Request Accepted at:179 ns
+Laura_Network.core_2_2 Requesting route at: 182 ns
+Laura_Network.core_0_2 Request Accepted at:183 ns
+Laura_Network.core_2_3 Request Accepted at:196 ns
+Laura_Network.core_0_9 Request Accepted at:204 ns
+Laura_Network.core_0_1 Requesting route at: 207 ns
+Laura_Network.core_0_2 Requesting route at: 208 ns
+Laura_Network.core_0_0 Requesting route at: 210 ns
+Laura_Network.core_2_3 Requesting route at: 221 ns
+Laura_Network.core_5_3 Request Accepted at:230 ns
+Laura_Network.core_0_0 Request Accepted at:232 ns
+Laura_Network.core_0_1 Request Accepted at:235 ns
+Laura_Network.core_0_2 Request Accepted at:239 ns
+Laura_Network.core_2_4 Request Accepted at:253 ns
+Laura_Network.core_0_2 Requesting route at: 259 ns
+Laura_Network.core_1_1 Request Accepted at:262 ns
+Laura_Network.core_0_0 Requesting route at: 263 ns
+Laura_Network.core_0_1 Requesting route at: 263 ns
+Laura_Network.core_0_2 Request Accepted at:266 ns
+Laura_Network.core_0_0 Request Accepted at:268 ns
+Laura_Network.core_0_1 Request Accepted at:271 ns
+Laura_Network.core_3_1 Request Accepted at:288 ns
+Laura_Network.core_0_2 Requesting route at: 292 ns
+Laura_Network.core_0_0 Requesting route at: 302 ns
+Laura_Network.core_0_1 Requesting route at: 304 ns
+Laura_Network.core_5_2 Request Accepted at:313 ns
+Laura_Network.core_0_0 Request Accepted at:315 ns
+Laura_Network.core_0_1 Request Accepted at:318 ns
+Laura_Network.core_0_2 Request Accepted at:322 ns
+Laura_Network.core_3_0 Request Accepted at:338 ns
+Laura_Network.core_0_1 Requesting route at: 344 ns
+Laura_Network.core_0_0 Requesting route at: 347 ns
+Laura_Network.core_0_2 Requesting route at: 348 ns
+Laura_Network.core_5_4 Request Accepted at:365 ns
+Laura_Network.core_0_0 Request Accepted at:367 ns
+Laura_Network.core_0_1 Request Accepted at:370 ns
+Laura_Network.core_0_2 Request Accepted at:374 ns
+Laura_Network.core_3_2 Request Accepted at:392 ns
+Laura_Network.core_0_0 Requesting route at: 400 ns
+Laura_Network.core_0_1 Requesting route at: 401 ns
+Laura_Network.core_0_2 Requesting route at: 402 ns
+Laura_Network.core_4_4 Request Accepted at:415 ns
+Laura_Network.core_0_0 Request Accepted at:417 ns
+Laura_Network.core_0_1 Request Accepted at:420 ns
+Laura_Network.core_0_2 Request Accepted at:424 ns
+Laura_Network.core_3_3 Request Accepted at:443 ns
+Laura_Network.core_0_0 Requesting route at: 449 ns
+Laura_Network.core_0_1 Requesting route at: 451 ns
+Laura_Network.core_0_2 Requesting route at: 459 ns
+Laura_Network.core_6_3 Request Accepted at:471 ns
+Laura_Network.core_0_0 Request Accepted at:473 ns
+Laura_Network.core_0_1 Request Accepted at:476 ns
+Laura_Network.core_0_2 Request Accepted at:480 ns
+Laura_Network.core_3_5 Request Accepted at:500 ns
+Laura_Network.core_0_2 Requesting route at: 502 ns
+Laura_Network.core_0_1 Requesting route at: 505 ns
+Laura_Network.core_0_0 Requesting route at: 506 ns
+Laura_Network.core_0_6 Request Accepted at:529 ns
+Laura_Network.core_0_0 Request Accepted at:531 ns
+Laura_Network.core_0_1 Request Accepted at:534 ns
+Laura_Network.core_0_2 Request Accepted at:538 ns
+Laura_Network.core_1_8 Request Accepted at:548 ns
+Laura_Network.core_0_6 Requesting route at: 553 ns
+Laura_Network.core_0_0 Requesting route at: 564 ns
+Laura_Network.core_0_1 Requesting route at: 564 ns
+Laura_Network.core_0_2 Requesting route at: 565 ns
+Laura_Network.core_0_6 Request Accepted at:577 ns
+Laura_Network.core_0_0 Request Accepted at:579 ns
+Laura_Network.core_0_1 Request Accepted at:582 ns
+Laura_Network.core_0_2 Request Accepted at:586 ns
+Laura_Network.core_3_6 Request Accepted at:607 ns
+Laura_Network.core_0_1 Requesting route at: 612 ns
+Laura_Network.core_0_0 Requesting route at: 613 ns
+Laura_Network.core_0_2 Requesting route at: 614 ns
+Laura_Network.core_0_8 Request Accepted at:637 ns
+Laura_Network.core_0_0 Request Accepted at:639 ns
+Laura_Network.core_0_1 Request Accepted at:642 ns
+Laura_Network.core_0_2 Request Accepted at:646 ns
+Laura_Network.core_2_2 Request Accepted at:658 ns
+Laura_Network.core_0_2 Requesting route at: 670 ns
+Laura_Network.core_0_1 Requesting route at: 671 ns
+Laura_Network.core_0_0 Requesting route at: 672 ns
+Laura_Network.core_4_1 Request Accepted at:680 ns
+Laura_Network.core_0_0 Request Accepted at:682 ns
+Laura_Network.core_0_1 Request Accepted at:685 ns
+Laura_Network.core_0_2 Request Accepted at:689 ns
+Laura_Network.core_0_0 Requesting route at: 716 ns
+Laura_Network.core_0_1 Requesting route at: 719 ns
+Laura_Network.core_0_2 Requesting route at: 719 ns
+Laura_Network.core_1_2 Request Accepted at:720 ns
+Laura_Network.core_0_0 Request Accepted at:722 ns
+Laura_Network.core_0_1 Request Accepted at:725 ns
+Laura_Network.core_0_2 Request Accepted at:729 ns
+Laura_Network.core_2_3 Request Accepted at:742 ns
+Laura_Network.core_1_2 Requesting route at: 745 ns
+Laura_Network.core_0_0 Requesting route at: 754 ns
+Laura_Network.core_0_2 Requesting route at: 756 ns
+Laura_Network.core_0_1 Requesting route at: 757 ns
+Laura_Network.core_1_2 Request Accepted at:773 ns
+Laura_Network.core_0_0 Request Accepted at:775 ns
+Laura_Network.core_0_1 Request Accepted at:778 ns
+Laura_Network.core_0_2 Request Accepted at:782 ns
+Laura_Network.core_0_1 Requesting route at: 801 ns
+Laura_Network.core_0_0 Requesting route at: 808 ns
+Laura_Network.core_1_3 Request Accepted at:814 ns
+Laura_Network.core_0_2 Requesting route at: 815 ns
+Laura_Network.core_0_0 Request Accepted at:816 ns
+Laura_Network.core_0_1 Request Accepted at:819 ns
+Laura_Network.core_0_2 Request Accepted at:823 ns
+Laura_Network.core_1_3 Requesting route at: 840 ns
+Laura_Network.core_0_0 Requesting route at: 849 ns
+Laura_Network.core_0_1 Requesting route at: 850 ns
+Laura_Network.core_0_2 Requesting route at: 852 ns
+Laura_Network.core_1_3 Request Accepted at:855 ns
+Laura_Network.core_0_0 Request Accepted at:857 ns
+Laura_Network.core_0_1 Request Accepted at:860 ns
+Laura_Network.core_0_2 Request Accepted at:864 ns
+Laura_Network.core_1_3 Requesting route at: 880 ns
+Laura_Network.core_0_2 Requesting route at: 889 ns
+Laura_Network.core_0_0 Requesting route at: 891 ns
+Laura_Network.core_0_1 Requesting route at: 891 ns
+Laura_Network.core_1_3 Request Accepted at:896 ns
+Laura_Network.core_0_0 Request Accepted at:898 ns
+Laura_Network.core_0_1 Request Accepted at:901 ns
+Laura_Network.core_0_2 Request Accepted at:905 ns
+Laura_Network.core_1_3 Requesting route at: 922 ns
+Laura_Network.core_0_0 Requesting route at: 929 ns
+Laura_Network.core_0_1 Requesting route at: 929 ns
+Laura_Network.core_0_2 Requesting route at: 931 ns
+Laura_Network.core_1_3 Request Accepted at:937 ns
+Laura_Network.core_0_0 Request Accepted at:939 ns
+Laura_Network.core_0_1 Request Accepted at:942 ns
+Laura_Network.core_0_2 Request Accepted at:946 ns
+Laura_Network.core_1_3 Requesting route at: 958 ns
+Laura_Network.core_0_1 Requesting route at: 973 ns
+Laura_Network.core_0_0 Requesting route at: 974 ns
+Laura_Network.core_0_2 Requesting route at: 977 ns
+Laura_Network.core_1_3 Request Accepted at:978 ns
+Laura_Network.core_0_0 Request Accepted at:980 ns
+Laura_Network.core_0_1 Request Accepted at:983 ns
+Laura_Network.core_0_2 Request Accepted at:987 ns
+Laura_Network.core_1_3 Requesting route at: 1002 ns
+Laura_Network.core_0_1 Requesting route at: 1007 ns
+Laura_Network.core_0_0 Requesting route at: 1014 ns
+Laura_Network.core_1_3 Request Accepted at:1019 ns
+Laura_Network.core_0_0 Request Accepted at:1021 ns
+Laura_Network.core_0_1 Request Accepted at:1024 ns
+Laura_Network.core_0_0 Requesting route at: 1051 ns
+Laura_Network.core_0_1 Requesting route at: 1055 ns
+Laura_Network.core_1_4 Request Accepted at:1057 ns
+Laura_Network.core_0_0 Request Accepted at:1059 ns
+Laura_Network.core_0_1 Request Accepted at:1062 ns
+Laura_Network.core_1_4 Requesting route at: 1081 ns
+Laura_Network.core_0_1 Requesting route at: 1090 ns
+Laura_Network.core_0_0 Requesting route at: 1092 ns
+Laura_Network.core_1_4 Request Accepted at:1095 ns
+Laura_Network.core_0_0 Request Accepted at:1097 ns
+Laura_Network.core_0_1 Request Accepted at:1100 ns
+Laura_Network.core_0_1 Requesting route at: 1125 ns
+Laura_Network.core_0_0 Requesting route at: 1132 ns
+Laura_Network.core_1_5 Request Accepted at:1134 ns
+Laura_Network.core_0_0 Request Accepted at:1136 ns
+Laura_Network.core_0_1 Request Accepted at:1139 ns
+Laura_Network.core_1_5 Requesting route at: 1158 ns
+Laura_Network.core_0_1 Requesting route at: 1170 ns
+Laura_Network.core_0_0 Requesting route at: 1171 ns
+Laura_Network.core_1_5 Request Accepted at:1173 ns
+Laura_Network.core_0_0 Request Accepted at:1175 ns
+Laura_Network.core_0_1 Request Accepted at:1178 ns
+Laura_Network.core_0_0 Requesting route at: 1206 ns
+Laura_Network.core_0_1 Requesting route at: 1210 ns
+Laura_Network.core_1_6 Request Accepted at:1213 ns
+Laura_Network.core_0_0 Request Accepted at:1215 ns
+Laura_Network.core_0_1 Request Accepted at:1218 ns
+Laura_Network.core_0_0 Requesting route at: 1248 ns
+Laura_Network.core_0_1 Requesting route at: 1249 ns
+Laura_Network.core_1_7 Request Accepted at:1254 ns
+Laura_Network.core_0_0 Request Accepted at:1256 ns
+Laura_Network.core_0_1 Request Accepted at:1259 ns
+Laura_Network.core_0_1 Requesting route at: 1281 ns
+Laura_Network.core_0_0 Requesting route at: 1288 ns
+Laura_Network.core_2_5 Request Accepted at:1296 ns
+Laura_Network.core_0_0 Request Accepted at:1298 ns
+Laura_Network.core_0_1 Request Accepted at:1301 ns
+Laura_Network.core_0_1 Requesting route at: 1330 ns
+Laura_Network.core_0_0 Requesting route at: 1334 ns
+Laura_Network.core_2_6 Request Accepted at:1339 ns
+Laura_Network.core_0_0 Request Accepted at:1341 ns
+Laura_Network.core_0_1 Request Accepted at:1344 ns
+Laura_Network.core_0_1 Requesting route at: 1372 ns
+Laura_Network.core_0_0 Requesting route at: 1374 ns
+Laura_Network.core_3_4 Request Accepted at:1383 ns
+Laura_Network.core_0_0 Request Accepted at:1385 ns
+Laura_Network.core_0_1 Request Accepted at:1388 ns
+Laura_Network.core_0_1 Requesting route at: 1416 ns
+Laura_Network.core_0_0 Requesting route at: 1417 ns
+Laura_Network.core_4_2 Request Accepted at:1428 ns
+Laura_Network.core_0_0 Request Accepted at:1430 ns
+Laura_Network.core_0_1 Request Accepted at:1433 ns
+Laura_Network.core_0_1 Requesting route at: 1460 ns
+Laura_Network.core_0_0 Requesting route at: 1464 ns
+Laura_Network.core_1_0 Request Accepted at:1474 ns
+Laura_Network.core_0_0 Request Accepted at:1476 ns
+Laura_Network.core_0_1 Request Accepted at:1479 ns
+Laura_Network.core_0_0 Requesting route at: 1510 ns
+Laura_Network.core_2_0 Request Accepted at:1521 ns
+Laura_Network.core_0_0 Request Accepted at:1523 ns
+Laura_Network.core_0_0 Requesting route at: 1556 ns
+Laura_Network.core_2_1 Request Accepted at:1566 ns
+Laura_Network.core_0_0 Request Accepted at:1568 ns
+Laura_Network.core_0_0 Requesting route at: 1604 ns
+Laura_Network.core_4_3 Request Accepted at:1612 ns
+Laura_Network.core_0_0 Request Accepted at:1614 ns
+Laura_Network.core_0_0 Requesting route at: 1647 ns
+Laura_Network.core_0_0 Request Accepted at:1659 ns
+Laura_Network.core_0_0 Requesting route at: 1696 ns
+Laura_Network.core_0_0 Request Accepted at:1704 ns
+Ending at: 1727 ns
+
+Info: /OSCI/SystemC: Simulation stopped by user.
+------------------- END SIMULATION -------------------

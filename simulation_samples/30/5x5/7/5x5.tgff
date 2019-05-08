@@ -1,0 +1,155 @@
+@HYPERPERIOD 500
+
+@COMMUN_ATTR 0 {
+#         price
+        8.53024
+
+#------------------------------------------------------------------------------
+# type    IdleCycles     Packages
+      0            8           18
+      1           14           23
+      2           14           23
+      3           12           21
+      4           13           22
+      5            9           19
+      6            7           18
+      7            8           18
+      8           14           23
+      9            7           18
+     10           10           20
+     11            9           19
+     12           10           20
+     13            7           18
+     14           11           21
+     15            9           19
+     16            8           18
+     17           13           22
+     18           10           20
+     19            9           19
+     20            9           19
+     21           13           23
+     22           12           22
+     23            7           17
+     24           13           22
+     25           11           21
+     26           10           20
+     27            8           18
+     28           11           21
+     29           13           22
+     30            6           17
+     31            7           17
+     32           13           23
+     33            9           19
+     34           13           23
+     35            5           16
+     36            7           18
+     37           13           23
+     38            7           17
+     39            5           16
+     40            9           20
+     41            5           16
+     42           10           20
+     43           12           21
+     44            9           19
+     45           14           23
+     46            5           16
+     47           12           22
+     48           13           22
+     49            6           17
+     50           10           20
+     51            9           19
+     52            8           18
+     53           12           22
+     54           12           22
+     55           10           20
+     56           10           20
+     57            9           19
+     58           10           20
+     59            5           16
+}
+
+
+
+@TASK_GRAPH 0 {
+	PERIOD 500
+
+	TASK t0_0	TYPE 0 
+	TASK t0_1	TYPE 1 
+	TASK t0_2	TYPE 2 
+	TASK t0_3	TYPE 3 
+	TASK t0_4	TYPE 4 
+	TASK t0_5	TYPE 5 
+	TASK t0_6	TYPE 6 
+	TASK t0_7	TYPE 7 
+	TASK t0_8	TYPE 8 
+	TASK t0_9	TYPE 9 
+	TASK t0_10	TYPE 10 
+	TASK t0_11	TYPE 11 
+	TASK t0_12	TYPE 12 
+	TASK t0_13	TYPE 13 
+	TASK t0_14	TYPE 14 
+	TASK t0_15	TYPE 15 
+	TASK t0_16	TYPE 16 
+	TASK t0_17	TYPE 17 
+	TASK t0_18	TYPE 18 
+	TASK t0_19	TYPE 19 
+	TASK t0_20	TYPE 20 
+	TASK t0_21	TYPE 21 
+	TASK t0_22	TYPE 22 
+	TASK t0_23	TYPE 23 
+	TASK t0_24	TYPE 24 
+	TASK t0_25	TYPE 25 
+
+	ARC a0_0 	FROM t0_0  TO  t0_1 TYPE 11
+	ARC a0_1 	FROM t0_1  TO  t0_2 TYPE 19
+	ARC a0_2 	FROM t0_1  TO  t0_3 TYPE 34
+	ARC a0_3 	FROM t0_1  TO  t0_4 TYPE 38
+	ARC a0_4 	FROM t0_1  TO  t0_5 TYPE 9
+	ARC a0_5 	FROM t0_1  TO  t0_6 TYPE 8
+	ARC a0_6 	FROM t0_1  TO  t0_7 TYPE 33
+	ARC a0_7 	FROM t0_1  TO  t0_8 TYPE 5
+	ARC a0_8 	FROM t0_1  TO  t0_9 TYPE 8
+	ARC a0_9 	FROM t0_1  TO  t0_10 TYPE 30
+	ARC a0_10 	FROM t0_5  TO  t0_11 TYPE 50
+	ARC a0_11 	FROM t0_5  TO  t0_12 TYPE 18
+	ARC a0_12 	FROM t0_5  TO  t0_13 TYPE 43
+	ARC a0_13 	FROM t0_5  TO  t0_14 TYPE 19
+	ARC a0_14 	FROM t0_2  TO  t0_15 TYPE 12
+	ARC a0_15 	FROM t0_9  TO  t0_15 TYPE 43
+	ARC a0_16 	FROM t0_6  TO  t0_15 TYPE 14
+	ARC a0_17 	FROM t0_0  TO  t0_15 TYPE 2
+	ARC a0_18 	FROM t0_13  TO  t0_15 TYPE 20
+	ARC a0_19 	FROM t0_12  TO  t0_16 TYPE 40
+	ARC a0_20 	FROM t0_12  TO  t0_17 TYPE 27
+	ARC a0_21 	FROM t0_12  TO  t0_18 TYPE 27
+	ARC a0_22 	FROM t0_12  TO  t0_19 TYPE 43
+	ARC a0_23 	FROM t0_12  TO  t0_20 TYPE 37
+	ARC a0_24 	FROM t0_12  TO  t0_21 TYPE 40
+	ARC a0_25 	FROM t0_12  TO  t0_22 TYPE 0
+	ARC a0_26 	FROM t0_12  TO  t0_23 TYPE 7
+	ARC a0_27 	FROM t0_4  TO  t0_24 TYPE 28
+	ARC a0_28 	FROM t0_4  TO  t0_25 TYPE 9
+
+	HARD_DEADLINE d0_0 ON t0_3 AT 300
+	HARD_DEADLINE d0_1 ON t0_7 AT 300
+	HARD_DEADLINE d0_2 ON t0_8 AT 300
+	HARD_DEADLINE d0_3 ON t0_10 AT 300
+	HARD_DEADLINE d0_4 ON t0_11 AT 400
+	HARD_DEADLINE d0_5 ON t0_14 AT 400
+	HARD_DEADLINE d0_6 ON t0_15 AT 500
+	HARD_DEADLINE d0_7 ON t0_16 AT 500
+	HARD_DEADLINE d0_8 ON t0_17 AT 500
+	HARD_DEADLINE d0_9 ON t0_18 AT 500
+	HARD_DEADLINE d0_10 ON t0_19 AT 500
+	HARD_DEADLINE d0_11 ON t0_20 AT 500
+	HARD_DEADLINE d0_12 ON t0_21 AT 500
+	HARD_DEADLINE d0_13 ON t0_22 AT 500
+	HARD_DEADLINE d0_14 ON t0_23 AT 500
+	HARD_DEADLINE d0_15 ON t0_24 AT 400
+	HARD_DEADLINE d0_16 ON t0_25 AT 400
+}
+
+
+
+
+

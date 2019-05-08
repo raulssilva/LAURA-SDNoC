@@ -1,0 +1,21 @@
+Loading configuration from file "../config_examples/Raul/10x10_config.yaml"... Done
+Loading power configurations from file "power.yaml"... Done
+
+Warning: (W545) sc_stop has already been called
+In file: sc_simcontext.cpp:1045
+In process: NoC.Tile[04][06]_(#64).Router.process @ 58579 ns
+
+Info: /OSCI/SystemC: Simulation stopped by user.
+% Total received packets: 10005
+% Total received flits: 10005
+% Received/Ideal flits Ratio: 5.14342e-06
+% Average wireless utilization: 0
+% Global average delay (cycles): 13.2774
+% Max delay (cycles): 23
+% Network throughput (flits/cycle): 8.22948e-06
+% Average IP throughput (flits/cycle/IP): 8.22948e-08
+% Total energy (J): 7.23574e-05
+% 	Dynamic energy (J): 1.273e-06
+% 	Static energy (J): 7.10844e-05
+
+---------------------------------
