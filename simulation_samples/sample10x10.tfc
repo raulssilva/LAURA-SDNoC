@@ -1,0 +1,15 @@
+# Network Dimensions NxM
+# ND: N M
+ND: 10 10
+
+# Core messages to send
+# srcX srcY destX destY numPckgs idleCycles
+CR: 0 0 9 9 10 1
+CR: 1 0 9 8 10 1
+CR: 2 0 9 7 10 1
+CR: 3 0 9 6 10 1
+CR: 4 0 9 5 10 1
+CR: 5 0 9 4 10 1
+CR: 6 0 9 3 10 1
+CR: 7 0 9 2 10 1
+CR: 8 0 9 1 10 1
